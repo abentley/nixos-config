@@ -8,4 +8,5 @@
     pkgs.jellyfin-web
     pkgs.jellyfin-ffmpeg
   ];
+  users.users.abentley.extraGroups = [ "jellyfin" ];
 }

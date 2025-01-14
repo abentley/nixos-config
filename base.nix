@@ -19,10 +19,15 @@
     libtool
     gcc
     git
+    lsof
+    python3
+    file
+    ffmpeg
   ];
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.openFirewall = true;
-
+  services.locate.enable = true;
+  virtualisation.containers.enable = true;
 }
