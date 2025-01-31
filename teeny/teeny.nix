@@ -7,6 +7,11 @@
   # at all.
   boot.supportedFilesystems = [ "bcachefs" "zfs" ];
   # boot.zfs.enabled = true;
+  boot.zfs.devNodes = "/dev/disk/by-partuuid/ed4867b2-c1f2-7249-9a71-a904b9d8d9f8";
+
+  boot.zfs.extraPools = [ "raidpool2" ];
+
+  services.zfs.autoScrub.enable = true;
 
   fileSystems."/mnt/bcachefs" = {
     device = "/dev/disk/by-uuid/33ac4789-8fdc-4774-ab7a-1f4384ca0aeb";
@@ -25,5 +30,7 @@
 
   # This is more of a graphical-server config, but I only have one of those.
   services.xserver.displayManager.gdm.autoSuspend = false;
-
+  environment.systemPackages = [
+    pkgs.mplayer
+  ];
 }

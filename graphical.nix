@@ -12,9 +12,16 @@
   # Enable TeamViewer
   services.teamviewer.enable = true;
 
+  # Enable "Desktop sharing"
+  services.gnome.gnome-remote-desktop.enable = true;
+
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+
+  services.xrdp.enable = true;
+  services.xrdp.defaultWindowManager = "gnome-remote-desktop";
+  services.xrdp.openFirewall = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -38,5 +45,8 @@
     # Wayland-compatible synergy!
     input-leap
     beeper
+    halloy
+    wireshark
+    discord
   ];
 }
