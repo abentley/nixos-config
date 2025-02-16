@@ -1,5 +1,7 @@
-{ config, pkgs, ... }:
-import ../samba.nix {config = config; pkgs=pkgs; name="teeny"; shares={
+{ ... }:
+import ../samba.nix {
+  name = "teeny";
+  shares = {
     "music" = {
       "path" = "/mnt/bcachefs/Music";
       "browseable" = "yes";
@@ -10,5 +12,5 @@ import ../samba.nix {config = config; pkgs=pkgs; name="teeny"; shares={
       "force user" = "jellyfin";
       "force group" = "jellyfin";
     };
-} ;
+  };
 }
