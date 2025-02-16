@@ -23,6 +23,7 @@
     python3
     file
     ffmpeg
+    nixfmt-rfc-style
   ];
 
   # Enable the OpenSSH daemon.

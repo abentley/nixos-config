@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ name, shares, ... }:
 {
 services.samba = {
   enable = true;
@@ -7,6 +7,9 @@ services.samba = {
     global = {
       "workgroup" = "WORKGROUP";
       "security" = "user";
+      "server string" = name;
+      "netbios name" = name;
+
       #"use sendfile" = "yes";
       #"max protocol" = "smb2";
       # note: localhost is the ipv6 localhost ::1
@@ -15,27 +18,7 @@ services.samba = {
       "guest account" = "nobody";
       "map to guest" = "bad user";
     };
-    "music" = {
-      "path" = "/mnt/bcachefs/Music";
-      "browseable" = "yes";
-      "read only" = "yes";
-      "guest ok" = "yes";
-      "create mask" = "0644";
-      "directory mask" = "0755";
-      "force user" = "jellyfin";
-      "force group" = "jellyfin";
-    };
-    "vr" = {
-      "path" = "/mnt/bcachefs/.shrimpy/anim/VR";
-      "browseable" = "yes";
-      "read only" = "yes";
-      "guest ok" = "no";
-      "create mask" = "0644";
-      "directory mask" = "0755";
-      "force user" = "abentley";
-      "force group" = "jellyfin";
-    };
-  };
+  } // shares;
 };
 
 services.samba-wsdd = {

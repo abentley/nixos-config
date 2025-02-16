@@ -1,15 +1,5 @@
 { config, pkgs, ... }:
-{
-imports = [../samba.nix];
-services.samba = {
-  settings = {
-    global = {
-      "server string" = "teeny";
-      "netbios name" = "teeny";
-      #"use sendfile" = "yes";
-      #"max protocol" = "smb2";
-      # note: localhost is the ipv6 localhost ::1
-    };
+import ../samba.nix {config = config; pkgs=pkgs; name="teeny"; shares={
     "music" = {
       "path" = "/mnt/bcachefs/Music";
       "browseable" = "yes";
@@ -20,6 +10,5 @@ services.samba = {
       "force user" = "jellyfin";
       "force group" = "jellyfin";
     };
-  };
-};
+} ;
 }
