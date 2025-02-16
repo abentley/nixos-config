@@ -5,16 +5,16 @@
 { config, pkgs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      ./graphical.nix
-      ./jellyfin.nix
-      ./incus.nix
-      ./teeny.nix
-      ./base.nix
-#      ./podman.nix
-    ];
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./graphical.nix
+    ./jellyfin.nix
+    ./incus.nix
+    ./teeny.nix
+    ./base.nix
+    #      ./podman.nix
+  ];
   virtualisation.docker.enable = true;
 
   # Bootloader.
@@ -61,20 +61,23 @@
   users.users.abentley = {
     isNormalUser = true;
     description = "Aaron Bentley";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
     ];
   };
 
   users.users.jellyfin.extraGroups = [ "docker" ];
 
-
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
+    #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    #  wget
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

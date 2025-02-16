@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 let
   zfsCompatibleKernelPackages = lib.filterAttrs (
     name: kernelPackages:
@@ -11,7 +16,8 @@ let
       builtins.attrValues zfsCompatibleKernelPackages
     )
   );
-in {
+in
+{
   # Note this might jump back and forth as kernels are added or removed.
   boot.kernelPackages = latestKernelPackage;
   boot.loader.grub.device = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S21HNXBG433208Y";
@@ -19,7 +25,10 @@ in {
 
   # Don't actually want this for booting, but this seems to be how you get it
   # at all.
-  boot.supportedFilesystems = [ "bcachefs" "zfs" ];
+  boot.supportedFilesystems = [
+    "bcachefs"
+    "zfs"
+  ];
   # boot.zfs.enabled = true;
   boot.zfs.devNodes = "/dev/disk/by-partuuid/ed4867b2-c1f2-7249-9a71-a904b9d8d9f8";
 
