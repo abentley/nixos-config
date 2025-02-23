@@ -6,7 +6,16 @@ let
       colorscheme murphy
       set shiftwidth=4
       set expandtab
+      se tabstop=4
+      se smarttab
+      se hlsearch
+      se visualbell
+      se list
+      se listchars=tab:>.,trail:-
     '';
+# call plug#begin()
+# Plug 'google/vim-jsonnet'
+# call plug#end()
   };
 in
 {
@@ -22,9 +31,11 @@ in
   home-manager.users.abentley =
     { pkgs, ... }:
     {
-      home.packages = [ pkgs.httpie ];
+      home.packages = [ vimPlugins.vim-jsonnet ];
       programs.bash.enable = true;
       home.stateVersion = "24.11";
-      programs.neovim = neovim_config;
+      programs.neovim = neovim_config // {
+        plugins = [ pkgs.vim-jsonnet ];
+      };
     };
 }
