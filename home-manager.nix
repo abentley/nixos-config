@@ -31,11 +31,19 @@ in
   home-manager.users.abentley =
     { pkgs, ... }:
     {
-      home.packages = [ vimPlugins.vim-jsonnet ];
+      home.packages = [ ];
       programs.bash.enable = true;
       home.stateVersion = "24.11";
       programs.neovim = neovim_config // {
-        plugins = [ pkgs.vim-jsonnet ];
+#        plugins = [ vimPlugins.vim-jsonnet ];
       };
+      home.file.".config/halloy/config.toml".text = ''
+        [servers.liberachat]
+        nickname = "abentley"
+        server = "irc.libera.chat"
+        channels = ["#halloy"]
+      '';
+      home.file.".config/hypr/shared.conf".source = ./hyperland-shared.conf;
+      home.file.".config/waybar/config.jsonc".source = ./waybar-config.jsonc;
     };
 }
