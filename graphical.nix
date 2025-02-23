@@ -48,5 +48,6 @@
     halloy
     wireshark
     discord
+    vesktop
   ];
 }
