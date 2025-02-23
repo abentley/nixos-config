@@ -25,6 +25,8 @@
     ffmpeg
     nixfmt-rfc-style
     htop
+    pciutils
+    usbutils
   ];
 
   # Enable the OpenSSH daemon.

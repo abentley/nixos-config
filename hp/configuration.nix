@@ -11,6 +11,8 @@
     ../graphical.nix
     ../base.nix
     ../home-manager.nix
+    # Not supported on integrated graphics of this machine
+    # ../hyprland.nix
   ];
 
   # Bootloader.
