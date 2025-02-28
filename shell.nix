@@ -5,5 +5,5 @@ let
 in
 
 pkgs.mkShellNoCC {
-  packages = with pkgs; selection;
+  packages = with pkgs; selection ++ [pkgs.neovim];
 }
