@@ -49,6 +49,7 @@
     wireshark
     discord
     vesktop
+    warpinator
   ];
   fonts.packages = with pkgs; [
     font-awesome
@@ -56,4 +57,7 @@
     powerline-symbols
     (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
   ];
+  # 42000, 42001: Warpinator.  Possibly unnecessary.
+  networking.firewall.allowedTCPPorts = [ 42000  42001 ];
+  networking.firewall.allowedUDPPorts = [ 42000  42001 ];
 }
