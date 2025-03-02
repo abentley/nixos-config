@@ -43,7 +43,9 @@ in
         server = "irc.libera.chat"
         channels = ["#halloy"]
       '';
-      home.file.".config/hypr/shared.conf".source = ./hyperland-shared.conf;
+      home.file.".config/hypr/shared.conf".source = ./hyprland-shared.conf;
+      home.file.".config/hypr/nix.conf".source = ./hyprland-nix.conf;
       home.file.".config/waybar/config.jsonc".source = ./waybar-config.jsonc;
+      home.file.".config/kitty/kitty.conf".source = ./kitty.conf;
     };
 }
