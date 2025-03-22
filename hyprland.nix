@@ -11,7 +11,11 @@
     # Clipboard functionality?
     pkgs.wl-clipboard
     pkgs.waybar
+    # Needed for volume in hyprland
     pkgs.pulseaudio
+    # Needed for brightness in hyprland
     pkgs.brightnessctl
   ];
+  # video is needed for udevd to permit brightness control
+  users.users.abentley.extraGroups = [ "video" ];
 }
