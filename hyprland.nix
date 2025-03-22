@@ -11,5 +11,7 @@
     # Clipboard functionality?
     pkgs.wl-clipboard
     pkgs.waybar
+    pkgs.pulseaudio
+    pkgs.brightnessctl
   ];
 }
