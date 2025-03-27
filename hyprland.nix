@@ -4,6 +4,7 @@
   environment.systemPackages = [
     pkgs.kitty
     pkgs.wofi
+    pkgs.walker
     # Animated wallpaper
     pkgs.swww
     # Automate plug/unplug behaviour
