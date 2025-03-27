@@ -16,6 +16,8 @@
     pkgs.pulseaudio
     # Needed for brightness in hyprland
     pkgs.brightnessctl
+    # Provides nm-connection-editor
+    pkgs.networkmanagerapplet
   ];
   # video is needed for udevd to permit brightness control
   users.users.abentley.extraGroups = [ "video" ];
