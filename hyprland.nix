@@ -18,6 +18,8 @@
     pkgs.brightnessctl
     # Provides nm-connection-editor
     pkgs.networkmanagerapplet
+    # Dock
+    pkgs.nwg-dock-hyprland
   ];
   # video is needed for udevd to permit brightness control
   users.users.abentley.extraGroups = [ "video" ];
