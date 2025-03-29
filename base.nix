@@ -27,6 +27,7 @@
     htop
     pciutils
     usbutils
+    nix-search
   ];
 
   # Enable the OpenSSH daemon.
