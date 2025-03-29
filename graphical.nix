@@ -50,6 +50,7 @@
     discord
     vesktop
     warpinator
+    rhythmbox
   ];
   fonts.packages = with pkgs; [
     font-awesome
