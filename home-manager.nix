@@ -48,5 +48,6 @@ in
       home.file.".config/waybar/config.jsonc".source = ./waybar/config.jsonc;
       home.file.".config/waybar/style.css".source = ./waybar/style.css;
       home.file.".config/kitty/kitty.conf".source = ./kitty.conf;
+      home.file.".local/share/applications/beeper.desktop".source = ./beeper.desktop;
     };
 }
