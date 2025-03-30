@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Beeper
+Exec=beeper --no-sandbox --enable-features=UseOzonePlatform --ozone-platform=wayland %U
+Terminal=false
+Type=Application
+Icon=beeper
+StartupWMClass=Beeper
+X-AppImage-Version=240923466rji1i4
+Comment=Beeper: Unified Messenger
+Categories=Utility;
