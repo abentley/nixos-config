@@ -51,6 +51,8 @@
     vesktop
     warpinator
     rhythmbox
+    # Gnome Loupe has bad fullscreen support
+    eog
   ];
   fonts.packages = with pkgs; [
     font-awesome

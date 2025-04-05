@@ -20,7 +20,12 @@
     pkgs.networkmanagerapplet
     # Dock
     pkgs.nwg-dock-hyprland
+    pkgs.pavucontrol
   ];
-  # video is needed for udevd to permit brightness control
-  users.users.abentley.extraGroups = [ "video" ];
+  users.users.abentley.extraGroups = [
+    # video is needed for udevd to permit brightness control
+    "video"
+    # input is used by to display key lock status
+    "input"
+  ];
 }

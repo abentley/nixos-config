@@ -47,7 +47,9 @@ in
       home.file.".config/hypr/nix.conf".source = ./hyprland/nix.conf;
       home.file.".config/waybar/config.jsonc".source = ./waybar/config.jsonc;
       home.file.".config/waybar/style.css".source = ./waybar/style.css;
+      home.file.".config/waybar/power_menu.xml".source = ./waybar/power_menu.xml;
       home.file.".config/kitty/kitty.conf".source = ./kitty.conf;
-      home.file.".local/share/applications/beeper.desktop".source = ./beeper.desktop;
+      home.file.".local/share/applications/beeper.desktop".source = ./applications/beeper.desktop;
+      home.file.".local/share/applications/org.gnome.eog.desktop".source = ./applications/org.gnome.eog.desktop;
     };
 }
