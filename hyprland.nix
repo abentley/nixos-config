@@ -21,6 +21,8 @@
     # Dock
     pkgs.nwg-dock-hyprland
     pkgs.pavucontrol
+    # Find key symbols
+    pkgs.xorg.xev
   ];
   users.users.abentley.extraGroups = [
     # video is needed for udevd to permit brightness control
