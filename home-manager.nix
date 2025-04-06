@@ -50,6 +50,7 @@ in
       home.file.".config/waybar/power_menu.xml".source = ./waybar/power_menu.xml;
       home.file.".config/kitty/kitty.conf".source = ./kitty.conf;
       home.file.".local/share/applications/beeper.desktop".source = ./applications/beeper.desktop;
-      home.file.".local/share/applications/org.gnome.eog.desktop".source = ./applications/org.gnome.eog.desktop;
+      # Turns out slideshow mode is different from double-click fullscreen.
+      # home.file.".local/share/applications/org.gnome.eog.desktop".source = ./applications/org.gnome.eog.desktop;
     };
 }

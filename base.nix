@@ -4,6 +4,7 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
+    viAlias = true;
   };
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -29,6 +30,11 @@
     usbutils
     nix-search
   ];
+
+  environment.variables = {
+    # EDITOR already set by programs.neovim.defaultEditor = true;
+    # EDITOR = "nvim";
+  };
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
