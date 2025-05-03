@@ -8,14 +8,9 @@
   outputs =
     { self, nixpkgs }:
     {
-      nixosConfigurations.thinky = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-        modules = [
-          ./git/thinky/configuration.nix
-          ./git/base.nix
-          ./git/graphical.nix
-          ./git/audio.nix
-        ];
+      nixosConfigurations.thinky = import ./git/thinky/flk.nix {
+        self = self;
+        nixpkgs = nixpkgs;
       };
     };
 }
