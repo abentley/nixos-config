@@ -53,6 +53,7 @@
     rhythmbox
     # Gnome Loupe has bad fullscreen support
     eog
+    gparted
   ];
   fonts.packages = with pkgs; [
     font-awesome
