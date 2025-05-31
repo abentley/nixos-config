@@ -10,7 +10,8 @@ nixpkgs.lib.nixosSystem {
     home-manager.nixosModules.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.abentley = ./home.nix;
+      home-manager.users.abentley = ../abentley.nix;
+      home-manager.users.root = ../root.nix;
       home-manager.backupFileExtension = "backup";
     }
   ];
