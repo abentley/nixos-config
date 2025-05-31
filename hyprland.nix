@@ -23,6 +23,9 @@
     pkgs.pavucontrol
     # Find key symbols
     pkgs.xorg.xev
+    pkgs.hyprcursor
+    # Cursor set
+    pkgs.bibata-cursors
   ];
   users.users.abentley.extraGroups = [
     # video is needed for udevd to permit brightness control

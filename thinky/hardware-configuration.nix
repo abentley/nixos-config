@@ -40,6 +40,12 @@
     options = [ "bind" ];
   };
 
+  fileSystems."/home/abentley/.config" = {
+    device = "/home/abentley/.nixos-config";
+    options = [ "bind" ];
+  };
+
+
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/D25E-3CB9";
     fsType = "vfat";
