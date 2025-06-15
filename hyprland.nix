@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, primaryUser, ... }:
 {
   programs.hyprland.enable = true;
   environment.systemPackages = [
@@ -27,7 +27,7 @@
     # Cursor set
     pkgs.bibata-cursors
   ];
-  users.users.abentley.extraGroups = [
+  users.users.${primaryUser}.extraGroups = [
     # video is needed for udevd to permit brightness control
     "video"
     # input is used by to display key lock status

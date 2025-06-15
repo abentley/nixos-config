@@ -1,11 +1,11 @@
-{ ... }:
+{ primaryUser, ... }:
 {
   networking.firewall.trustedInterfaces = [ "incusbr0" ];
 
   # Needed for Incus
   networking.nftables.enable = true;
 
-  users.users.abentley = {
+  users.users.${primaryUser}= {
     extraGroups = [ "incus-admin" ];
   };
 

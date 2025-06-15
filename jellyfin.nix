@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, primaryUser, ... }:
 
 {
   services.jellyfin.enable = true;
@@ -13,7 +13,7 @@
     # Support hdhomerun-config-gui View button
     pkgs.vlc
   ];
-  users.users.abentley.extraGroups = [ "jellyfin" ];
+  users.users.${primaryUser}.extraGroups = [ "jellyfin" ];
   # HDHomerun's discovery mechanism requires me to receive packets to an
   # arbitrary port with a source-port of 65001
   networking.firewall.extraInputRules = "udp sport 65001 accept";
