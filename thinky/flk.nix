@@ -15,4 +15,5 @@ nixpkgs.lib.nixosSystem {
       home-manager.backupFileExtension = "backup";
     }
   ];
+  specialArgs = {primaryUser = "abentley";};
 }

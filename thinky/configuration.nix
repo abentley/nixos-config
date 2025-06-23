@@ -11,7 +11,18 @@
   ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "nodev";
+  # boot.loader.grub.efiInstallAsRemovable = true;
+  boot.loader.grub.efiSupport = true;
+  #boot.loader.grub.gfxmodeBios = "1280x720";
+  boot.loader.grub.gfxmodeEfi = "1366x768x32";
+  boot.loader.grub.useOSProber = true;
+  # boot.loader.grub.splashImage = "/home/abentley/treemoon.bmp";
+  # boot.loader.grub.font = "${pkgs.hack-font}/share/fonts/hack/Hack-Regular.ttf";
+  # boot.loader.grub.fontSize = 24;
+  # boot.loader.systemd-boot.enable = true;
+  # Conflicts with boot.loader.grub.efiInstallAsRemovable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "thinky"; # Define your hostname.
