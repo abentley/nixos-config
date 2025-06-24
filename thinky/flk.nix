@@ -7,6 +7,7 @@ nixpkgs.lib.nixosSystem {
     ../graphical.nix
     ../audio.nix
     ../hyprland.nix
+    ../flake-enablement.nix
     home-manager.nixosModules.home-manager {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;

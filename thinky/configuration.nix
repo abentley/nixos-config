@@ -18,7 +18,7 @@
     gfxmodeEfi = "1366x768x32";
     useOSProber = true;
     # efiInstallAsRemovable = true;
-    # splashImage = "/home/abentley/treemoon.bmp";
+    splashImage = "/home/abentley/treemoon2.png";
     # font = "${pkgs.hack-font}/share/fonts/hack/Hack-Regular.ttf";
     # fontSize = 24;
   };
