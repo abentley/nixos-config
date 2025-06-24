@@ -5,30 +5,17 @@
 { config, pkgs, ... }:
 
 {
-  _module.args = {
-    primaryUser = "abentley";
-    primaryUserDescription = "Aaron Bentleyy";
-  };
   imports = [
-    # Include the results of the hardware scan.
-    ./git/teeny/hardware-configuration.nix
-    ./git/graphical.nix
-    ./git/jellyfin.nix
-    ./git/incus.nix
-    ./git/teeny/teeny.nix
-    ./git/base.nix
-    #      ./podman.nix
-    ./git/teeny/samba-teeny.nix
-    ./samba-vr.nix
-    ./git/hyprland.nix
-    ./git/home-manager.nix
-    ./git/flake-enablement.nix
   ];
   virtualisation.docker.enable = true;
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub = {
+    enable = true;
+    useOSProber = true;
+    gfxmodeBios = "1920x1080x32";
+    splashImage = ./darktrees.png;
+  };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
