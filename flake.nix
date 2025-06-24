@@ -10,5 +10,6 @@
   outputs = inputs@ { self, nixpkgs, home-manager }:
     {
       nixosConfigurations.thinky = import ./git/thinky/flk.nix {self=self; nixpkgs=nixpkgs; home-manager=home-manager;};
+      nixosConfigurations.teeny = import ./git/teeny/flk.nix {self=self; nixpkgs=nixpkgs; home-manager=home-manager;};
     };
 }
