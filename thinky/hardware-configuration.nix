@@ -45,7 +45,6 @@
     options = [ "bind" ];
   };
 
-
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/D25E-3CB9";
     fsType = "vfat";

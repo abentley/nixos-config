@@ -5,7 +5,7 @@
   # Needed for Incus
   networking.nftables.enable = true;
 
-  users.users.${primaryUser}= {
+  users.users.${primaryUser} = {
     extraGroups = [ "incus-admin" ];
   };
 

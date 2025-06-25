@@ -1,5 +1,7 @@
 { pkgs, primaryUser, ... }:
-
+let
+  comskip = (pkgs.callPackage ./comskip.nix { });
+in
 {
   services.jellyfin.enable = true;
   services.jellyfin.openFirewall = true;
@@ -12,6 +14,8 @@
     pkgs.hdhomerun-config-gui
     # Support hdhomerun-config-gui View button
     pkgs.vlc
+    # Support commercial cutting
+    comskip
   ];
   users.users.${primaryUser}.extraGroups = [ "jellyfin" ];
   # HDHomerun's discovery mechanism requires me to receive packets to an

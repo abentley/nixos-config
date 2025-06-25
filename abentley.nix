@@ -3,7 +3,7 @@
   home.stateVersion = "24.11";
   #home.packages = [ ];
   programs.neovim = import ./neovim-config.nix // {
-#    plugins = [ vimPlugins.vim-jsonnet ];
+    #    plugins = [ vimPlugins.vim-jsonnet ];
   };
   programs.bash.enable = true;
   home.file.".config/halloy/config.toml".text = ''

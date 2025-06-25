@@ -13,9 +13,9 @@ let
       se list
       se listchars=tab:>.,trail:-
     '';
-# call plug#begin()
-# Plug 'google/vim-jsonnet'
-# call plug#end()
+    # call plug#begin()
+    # Plug 'google/vim-jsonnet'
+    # call plug#end()
   };
 in
 {
@@ -35,7 +35,7 @@ in
       programs.bash.enable = true;
       home.stateVersion = "24.11";
       programs.neovim = neovim_config // {
-#        plugins = [ vimPlugins.vim-jsonnet ];
+        #        plugins = [ vimPlugins.vim-jsonnet ];
       };
       home.file.".config/halloy/config.toml".text = ''
         [servers.liberachat]
