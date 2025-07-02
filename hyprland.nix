@@ -33,4 +33,8 @@
     # input is used by to display key lock status
     "input"
   ];
+  xdg.portal = {
+    enable = true;
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+  };
 }

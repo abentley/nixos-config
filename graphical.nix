@@ -55,6 +55,7 @@
     eog
     gparted
   ];
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   fonts.packages = with pkgs; [
     font-awesome
     powerline-fonts
