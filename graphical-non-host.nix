@@ -1,9 +1,5 @@
 { config, pkgs, ... }:
 {
-
-  # Enable TeamViewer
-  services.teamviewer.enable = true;
-
   # Enable "Desktop sharing"
   services.gnome.gnome-remote-desktop.enable = true;
 

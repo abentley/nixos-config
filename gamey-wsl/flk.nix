@@ -9,6 +9,7 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ./configuration.nix
     ../base.nix
+    ../graphical-non-host.nix
     ../flake-enablement.nix
     home-manager.nixosModules.home-manager
     {

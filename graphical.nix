@@ -3,6 +3,9 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  # Enable TeamViewer
+  services.teamviewer.enable = true;
+
   # Install firefox.
   programs.firefox.enable = true;
 
