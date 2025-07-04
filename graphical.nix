@@ -14,9 +14,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable TeamViewer
-  services.teamviewer.enable = true;
-
   # Enable "Desktop sharing"
   services.gnome.gnome-remote-desktop.enable = true;
 
