@@ -1,5 +1,7 @@
 { config, pkgs, ... }:
 {
+  imports = [ ./graphical-non-host.nix ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 

@@ -9,6 +9,13 @@
         "security" = "user";
         "server string" = name;
         "netbios name" = name;
+        # Activating causes "invalid argument" accessing names with
+        # double-quotes.
+        # "mangled names" = "no";
+        "dos charset" = "CP850";
+        "unix charset" = "UTF-8";
+        # This was claimed to fix quoted names, but no.
+        # "unix extensions" = "no";
 
         #"use sendfile" = "yes";
         #"max protocol" = "smb2";

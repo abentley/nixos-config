@@ -6,9 +6,9 @@ in
   services.jellyfin.enable = true;
   services.jellyfin.openFirewall = true;
   environment.systemPackages = [
-    pkgs.jellyfin
-    pkgs.jellyfin-web
-    pkgs.jellyfin-ffmpeg
+    # pkgs.jellyfin
+    # pkgs.jellyfin-web
+    # pkgs.jellyfin-ffmpeg
     # Provide CLI hdhomerun_config
     pkgs.libhdhomerun
     pkgs.hdhomerun-config-gui
