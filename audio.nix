@@ -8,6 +8,7 @@
     ardour
     soundfont-generaluser
     soundfont-fluid
+    jamulus
   ];
   services.pipewire.jack.enable = true;
 }

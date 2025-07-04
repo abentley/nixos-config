@@ -10,8 +10,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    baobab
     halloy
     wireshark
+    meld
   ];
   fonts.packages = with pkgs; [
     font-awesome

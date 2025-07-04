@@ -29,6 +29,16 @@
     pciutils
     usbutils
     nix-search
+    breezy
+    graphviz
+    nethogs
+    nmap
+    opentofu
+    tree
+    wget
+    whois
+    squashfsTools
+    dive
   ];
 
   environment.variables = {

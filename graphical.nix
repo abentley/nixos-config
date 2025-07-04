@@ -22,10 +22,6 @@
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
 
-  services.xrdp.enable = true;
-  services.xrdp.defaultWindowManager = "gnome-remote-desktop";
-  services.xrdp.openFirewall = true;
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -49,7 +45,6 @@
     input-leap
     beeper
     halloy
-    wireshark
     discord
     vesktop
     warpinator
@@ -57,14 +52,10 @@
     # Gnome Loupe has bad fullscreen support
     eog
     gparted
+    vlc
+    easyeffects
   ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
-  fonts.packages = with pkgs; [
-    font-awesome
-    powerline-fonts
-    powerline-symbols
-    (nerdfonts.override { fonts = [ "NerdFontsSymbolsOnly" ]; })
-  ];
   # 42000, 42001: Warpinator.  Possibly unnecessary.
   networking.firewall.allowedTCPPorts = [
     42000
