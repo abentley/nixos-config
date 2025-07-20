@@ -2,6 +2,8 @@
 
 {
   environment.systemPackages = with pkgs; [
+    audacious
+    audacious-plugins
     qsynth
     qjackctl
     audacity
