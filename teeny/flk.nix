@@ -1,6 +1,7 @@
 {
   self,
   nixpkgs,
+  old-nixpkgs,
   home-manager,
 }:
 nixpkgs.lib.nixosSystem {
@@ -29,5 +30,6 @@ nixpkgs.lib.nixosSystem {
   ];
   specialArgs = {
     primaryUser = "abentley";
+    old-nixpkgs = old-nixpkgs;
   };
 }
