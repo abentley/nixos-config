@@ -42,6 +42,7 @@
     whois
     squashfsTools
     dive
+    mtr
   ];
 
   environment.variables = {

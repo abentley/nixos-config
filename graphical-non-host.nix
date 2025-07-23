@@ -14,6 +14,7 @@
     halloy
     wireshark
     meld
+    mtr-gui
   ];
   fonts.packages = with pkgs; [
     font-awesome
