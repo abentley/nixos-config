@@ -36,5 +36,10 @@
         home-manager = home-manager;
         nixos-wsl = nixos-wsl;
       };
+      nixosConfigurations.hp = import ./git/hp/flk.nix {
+        self = self;
+        nixpkgs = nixpkgs;
+        home-manager = home-manager;
+      };
     };
 }
