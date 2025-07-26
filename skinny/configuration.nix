@@ -8,10 +8,6 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./git/base.nix
-    ./git/graphical.nix
-    ./git/home-manager.nix
-    ./git/hyprland.nix
   ];
 
   # Bootloader.
@@ -38,7 +34,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
