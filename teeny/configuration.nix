@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -15,6 +15,64 @@
     useOSProber = true;
     gfxmodeBios = "1920x1080x32";
     splashImage = ./darktrees.png;
+  };
+
+  # Disable the standard kernel console setup as kmscon will take over
+  # This prevents conflicts and ensures kmscon manages the TTYs
+#   console.enable = false;
+#   systemd.services.systemd-vconsole-setup.enable = false;
+#   systemd.services.reload-systemd-vconsole-setup.enable = false;
+
+#   services.kmscon = {
+#     enable = true;
+#     hwRender = true; # Enable hardware acceleration for better performance (recommended)
+#     keyMap = "us";   # Or your preferred keyboard layout, e.g., "de", "fr"
+#     # useXkbConfig = true; # If you want to use your X server's keyboard settings (optional)
+# 
+#     # Configure fonts for kmscon. This is where you set your larger font.
+#     # You can specify multiple fonts; kmscon will try them in order.
+#     # Use standard font names that fontconfig can resolve.
+#     # Make sure the font packages are available in your system environment.
+#     fonts = [
+#       {
+#         name = "Hack"; # A popular monospace font, usually looks good.
+#         package = pkgs.hack-font; # Ensure this package is in your environment.systemPackages or is pulled by other means
+#       }
+#       {
+#         name = "Source Code Pro";
+#         package = pkgs.source-code-pro;
+#       }
+#       {
+#         name = "DejaVu Sans Mono"; # Another good fallback
+#         package = pkgs.dejavu_fonts;
+#       }
+#       # You can also specify an exact font file if needed, though less common for kmscon
+#       # {
+#       #   name = "${pkgs.fira-code}/share/fonts/opentype/FiraCode-Retina.otf";
+#       #   package = pkgs.fira-code;
+#       # }
+#     ];
+# 
+#     # This is the crucial part for controlling the font size.
+#     # You can set font-size directly here.
+#     extraConfig = ''
+#       font-size=96 # Start with a reasonable size, adjust as needed for 4K
+#       # You can also set a default font if you don't use the 'fonts' option above
+#       # font-name=Hack
+#       # Other useful options:
+#       # xkb-options=terminate:ctrl_alt_bksp # Allows Ctrl+Alt+Backspace to kill X/Wayland session
+#       # login=/bin/bash --login # If you want to automatically log in to a shell (not recommended for security)
+#     '';
+# 
+#     # Optional: If you want to customize command-line options passed to kmscon
+#     # extraOptions = "--term xterm-256color";
+#   };
+
+  console = {
+    earlySetup = true; # Apply font early in boot process
+    font = "${pkgs.spleen}/share/consolefonts/spleen-32x64.psfu";
+    packages = with pkgs; [ terminus_font ]; # Ensure the font package is available
+    keyMap = "us"; # Your preferred keymap
   };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
@@ -74,6 +132,10 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
+    # Make sure the font packages are available system-wide if not pulled by kmscon itself
+    # hack-font
+    # source-code-pro
+    # dejavu_fonts
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
