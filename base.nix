@@ -49,6 +49,7 @@
     # EDITOR already set by programs.neovim.defaultEditor = true;
     # EDITOR = "nvim";
   };
+  environment.homeBinInPath = true;
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
