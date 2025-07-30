@@ -8,11 +8,19 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
+      ./auto-rotation.nix
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.initrd.kernelModules = [ "i915" ];
+  console = {
+    earlySetup = true; # Apply font early in boot process
+    font = "${pkgs.terminus_font}/share/consolefonts/ter-i32b.psf.gz"; # Example: 32pt Terminus font
+    packages = with pkgs; [ terminus_font ]; # Ensure the font package is available
+    keyMap = "us"; # Your preferred keymap
+  };
 
   networking.hostName = "handy"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -32,7 +40,6 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
@@ -88,6 +95,12 @@
   #  wget
   ];
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
