@@ -22,6 +22,15 @@
     # font = "${pkgs.hack-font}/share/fonts/hack/Hack-Regular.ttf";
     # fontSize = 24;
   };
+  boot.initrd.kernelModules = [ "i915" ];
+
+  console = {
+    earlySetup = true; # Apply font early in boot process
+    font = "${pkgs.spleen}/share/consolefonts/spleen-32x64.psfu";
+    packages = with pkgs; [ terminus_font ]; # Ensure the font package is available
+    keyMap = "us"; # Your preferred keymap
+  };
+
   # boot.loader.systemd-boot.enable = true;
   # Conflicts with boot.loader.grub.efiInstallAsRemovable = true;
   boot.loader.efi.canTouchEfiVariables = true;
