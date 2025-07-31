@@ -18,6 +18,7 @@ nixpkgs.lib.nixosSystem {
     ../../samba-vr.nix
     ../hyprland.nix
     ../flake-enablement.nix
+    ../early-console.nix
     ./configuration.nix
     home-manager.nixosModules.home-manager
     {
@@ -31,5 +32,6 @@ nixpkgs.lib.nixosSystem {
   specialArgs = {
     primaryUser = "abentley";
     old-nixpkgs = old-nixpkgs;
+    consoleFontName = "spleen";
   };
 }

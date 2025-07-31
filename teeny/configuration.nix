@@ -3,7 +3,6 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, lib, ... }:
-
 {
   imports = [
   ];
@@ -68,12 +67,6 @@
 #     # extraOptions = "--term xterm-256color";
 #   };
 
-  console = {
-    earlySetup = true; # Apply font early in boot process
-    font = "${pkgs.spleen}/share/consolefonts/spleen-32x64.psfu";
-    packages = with pkgs; [ terminus_font ]; # Ensure the font package is available
-    keyMap = "us"; # Your preferred keymap
-  };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary

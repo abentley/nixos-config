@@ -23,5 +23,6 @@ nixpkgs.lib.nixosSystem {
   ];
   specialArgs = {
     primaryUser = "abentley";
+    consoleFont = "terminus";
   };
 }
