@@ -8,20 +8,12 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      ./auto-rotation.nix
     ];
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   boot.initrd.kernelModules = [ "i915" ];
-  console = {
-    earlySetup = true; # Apply font early in boot process
-    font = "${pkgs.terminus_font}/share/consolefonts/ter-i32b.psf.gz"; # Example: 32pt Terminus font
-    packages = with pkgs; [ terminus_font ]; # Ensure the font package is available
-    keyMap = "us"; # Your preferred keymap
-  };
-
   networking.hostName = "handy"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
