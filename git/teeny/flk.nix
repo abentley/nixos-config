@@ -15,7 +15,7 @@ nixpkgs.lib.nixosSystem {
     ../base.nix
     #      ./podman.nix
     ./samba-teeny.nix
-    ../../samba-vr.nix
+    # ../../samba-vr.nix
     ../hyprland.nix
     ../flake-enablement.nix
     ../early-console.nix
