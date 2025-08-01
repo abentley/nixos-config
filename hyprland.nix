@@ -27,6 +27,7 @@
     # Cursor set
     pkgs.bibata-cursors
     pkgs.adwaita-icon-theme
+    pkgs.blueman
   ];
   users.users.${primaryUser}.extraGroups = [
     # video is needed for udevd to permit brightness control
