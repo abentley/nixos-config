@@ -12,6 +12,7 @@ nixpkgs.lib.nixosSystem {
     ../audio.nix
     ../hyprland.nix
     ../flake-enablement.nix
+    ../early-console.nix
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
@@ -23,6 +24,6 @@ nixpkgs.lib.nixosSystem {
   ];
   specialArgs = {
     primaryUser = "abentley";
-    consoleFont = "terminus";
+    consoleFontName = "spleen";
   };
 }

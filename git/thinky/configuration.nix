@@ -24,13 +24,6 @@
   };
   boot.initrd.kernelModules = [ "i915" ];
 
-  console = {
-    earlySetup = true; # Apply font early in boot process
-    font = "${pkgs.spleen}/share/consolefonts/spleen-32x64.psfu";
-    packages = with pkgs; [ terminus_font ]; # Ensure the font package is available
-    keyMap = "us"; # Your preferred keymap
-  };
-
   # boot.loader.systemd-boot.enable = true;
   # Conflicts with boot.loader.grub.efiInstallAsRemovable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -125,10 +118,6 @@
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
     shotwell
-  ];
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
