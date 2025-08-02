@@ -19,6 +19,24 @@
       nixos-wsl,
     }:
     {
+      packages.x86_64-linux.default =
+        let
+          pkgs = import nixpkgs {
+            config = { };
+            overlays = [ ];
+            system = "x86_64-linux";
+          };
+          selection =
+            (import ./suites/base.nix {
+              config = { };
+              pkgs = pkgs;
+            }).environment.systemPackages
+            ++ [ pkgs.neovim ];
+        in
+        pkgs.mkShellNoCC {
+          packages = selection;
+        };
+
       nixosConfigurations.thinky = import ./thinky/flk.nix {
         self = self;
         nixpkgs = nixpkgs;
