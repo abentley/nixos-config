@@ -6,31 +6,8 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
   ];
 
-  # Bootloader.
-  boot.loader.grub = {
-    enable = true;
-    device = "nodev";
-    efiSupport = true;
-    gfxmodeEfi = "1366x768x32";
-    useOSProber = true;
-    # efiInstallAsRemovable = true;
-    splashImage = "/home/abentley/treemoon2.png";
-    # font = "${pkgs.hack-font}/share/fonts/hack/Hack-Regular.ttf";
-    # fontSize = 24;
-  };
-  boot.initrd.kernelModules = [ "i915" ];
-
-  # boot.loader.systemd-boot.enable = true;
-  # Conflicts with boot.loader.grub.efiInstallAsRemovable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-
-  # boot.plymouth.enable = true;
-
-  networking.hostName = "thinky"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -41,35 +18,10 @@
   networking.networkmanager.enable = true;
 
   # Set your time zone.
-  time.timeZone = "America/New_York";
+  time.timeZone = "America/Toronto";
 
   # Select internationalisation properties.
-  i18n.defaultLocale = "en_US.UTF-8";
-
-  i18n.extraLocaleSettings = {
-    LC_ADDRESS = "en_US.UTF-8";
-    LC_IDENTIFICATION = "en_US.UTF-8";
-    LC_MEASUREMENT = "en_US.UTF-8";
-    LC_MONETARY = "en_US.UTF-8";
-    LC_NAME = "en_US.UTF-8";
-    LC_NUMERIC = "en_US.UTF-8";
-    LC_PAPER = "en_US.UTF-8";
-    LC_TELEPHONE = "en_US.UTF-8";
-    LC_TIME = "en_US.UTF-8";
-  };
-
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
-  };
+  i18n.defaultLocale = "en_CA.UTF-8";
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
@@ -117,7 +69,6 @@
   environment.systemPackages = with pkgs; [
     #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     #  wget
-    shotwell
   ];
 
   # Some programs need SUID wrappers, can be configured further or are

@@ -7,6 +7,9 @@ nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
     ./configuration.nix
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./specific.nix
     ../suites/base.nix
     ../suites/graphical-computer.nix
     ../features/hyprland.nix

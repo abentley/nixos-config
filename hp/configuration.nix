@@ -6,16 +6,8 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
   ];
 
-  # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
-
-  networking.hostName = "hp"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -30,12 +22,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
-
-  # Install neovim
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-  };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;

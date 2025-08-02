@@ -8,6 +8,9 @@ nixpkgs.lib.nixosSystem {
   modules = [
     # Include the results of the hardware scan.
     ./configuration.nix
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ./specific.nix
     ../suites/graphical-computer.nix
     ../suites/base.nix
     # Not supported on integrated graphics of this machine
