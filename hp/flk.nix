@@ -8,7 +8,7 @@ nixpkgs.lib.nixosSystem {
   modules = [
     # Include the results of the hardware scan.
     ./configuration.nix
-    ../suites/graphical.nix
+    ../suites/graphical-computer.nix
     ../suites/base.nix
     # Not supported on integrated graphics of this machine
     # ../hyprland.nix

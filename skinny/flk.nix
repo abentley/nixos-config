@@ -8,7 +8,7 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ./configuration.nix
     ../suites/base.nix
-    ../suites/graphical.nix
+    ../suites/graphical-computer.nix
     ../features/hyprland.nix
     ../features/flake-enablement.nix
     ../features/early-console.nix

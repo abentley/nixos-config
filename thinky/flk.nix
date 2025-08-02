@@ -8,8 +8,8 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ./configuration.nix
     ../suites/base.nix
-    ../suites/graphical.nix
-    ../suites/audio.nix
+    ../suites/graphical-computer.nix
+    ../suites/audio-production.nix
     ../features/hyprland.nix
     ../features/early-console.nix
     home-manager.nixosModules.home-manager

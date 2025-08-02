@@ -8,7 +8,7 @@ nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
     ./hardware-configuration.nix
-    ../suites/graphical.nix
+    ../suites/graphical-computer.nix
     ../features/jellyfin.nix
     ../features/incus.nix
     ./teeny.nix
