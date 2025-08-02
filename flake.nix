@@ -46,7 +46,7 @@
         nixpkgs = nixpkgs;
         home-manager = home-manager;
       };
-      nixosConfigurations.handy = import ./git/handy/flk.nix {
+      nixosConfigurations.handy = import ./handy/flk.nix {
         self = self;
         nixpkgs = nixpkgs;
         home-manager = home-manager;
