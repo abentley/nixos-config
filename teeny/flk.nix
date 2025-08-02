@@ -19,7 +19,7 @@ nixpkgs.lib.nixosSystem {
     # ../../samba-vr.nix
     ../features/hyprland.nix
     ../features/early-console.nix
-    ./configuration.nix
+    ../base-configuration.nix
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;

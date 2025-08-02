@@ -6,7 +6,7 @@
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
-    ./configuration.nix
+    ../base-configuration.nix
     ./hardware-configuration.nix
     ./specific.nix
     ../features/auto-rotation.nix

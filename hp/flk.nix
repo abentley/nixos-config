@@ -6,8 +6,7 @@
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
-    # Include the results of the hardware scan.
-    ./configuration.nix
+    ../base-configuration.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ./specific.nix
