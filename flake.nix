@@ -30,13 +30,13 @@
         old-nixpkgs = old-nixpkgs;
         home-manager = home-manager;
       };
-      nixosConfigurations.gamey-wsl = import ./git/gamey-wsl/flk.nix {
+      nixosConfigurations.gamey-wsl = import ./gamey-wsl/flk.nix {
         self = self;
         nixpkgs = nixpkgs;
         home-manager = home-manager;
         nixos-wsl = nixos-wsl;
       };
-      nixosConfigurations.hp = import ./git/hp/flk.nix {
+      nixosConfigurations.hp = import ./hp/flk.nix {
         self = self;
         nixpkgs = nixpkgs;
         home-manager = home-manager;

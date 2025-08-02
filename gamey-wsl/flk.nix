@@ -8,15 +8,15 @@ nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
     ./configuration.nix
-    ../base.nix
-    ../graphical-non-host.nix
-    ../flake-enablement.nix
+    ../suites/base.nix
+    ../suites/graphical-non-host.nix
+    # ../flake-enablement.nix
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users.abentley = ../abentley.nix;
-      home-manager.users.root = ../root.nix;
+      home-manager.users.abentley = ../users/abentley.nix;
+      home-manager.users.root = ../users/root.nix;
       home-manager.backupFileExtension = "backup";
     }
     nixos-wsl.nixosModules.default
