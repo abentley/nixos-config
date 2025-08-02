@@ -23,5 +23,6 @@
   home.file.".config/walker/config.toml".source = ../config/walker/config.toml;
   home.file.".config/walker/themes/default.toml".source = ../config/walker/themes/default.toml;
   home.file.".config/walker/themes/default.css".source = ../config/walker/themes/default.css;
-  home.file.".config/walker/themes/default_window.toml".source = ../config/walker/themes/default_window.toml;
+  home.file.".config/walker/themes/default_window.toml".source =
+    ../config/walker/themes/default_window.toml;
 }

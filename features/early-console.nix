@@ -1,4 +1,9 @@
-{ config, pkgs, consoleFontName, ... }:
+{
+  config,
+  pkgs,
+  consoleFontName,
+  ...
+}:
 let
   consoleFont = consoleFonts.${consoleFontName};
   consoleFonts = {

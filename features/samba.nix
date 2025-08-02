@@ -25,7 +25,8 @@
         "guest account" = "nobody";
         "map to guest" = "bad user";
       };
-    } // shares;
+    }
+    // shares;
   };
 
   services.samba-wsdd = {

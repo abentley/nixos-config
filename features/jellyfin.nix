@@ -1,7 +1,12 @@
-{ pkgs, old-nixpkgs, primaryUser, ... }:
+{
+  pkgs,
+  old-nixpkgs,
+  primaryUser,
+  ...
+}:
 let
-  pkgs = import old-nixpkgs {system = "x86_64-linux";};
-  comskip = (pkgs.callPackage ../packages/comskip.nix {pkgs = pkgs; });
+  pkgs = import old-nixpkgs { system = "x86_64-linux"; };
+  comskip = (pkgs.callPackage ../packages/comskip.nix { pkgs = pkgs; });
 in
 {
   services.jellyfin.enable = true;

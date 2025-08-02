@@ -43,6 +43,7 @@
     squashfsTools
     dive
     mtr
+    nixfmt-tree
   ];
 
   environment.variables = {
