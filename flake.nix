@@ -24,7 +24,7 @@
         nixpkgs = nixpkgs;
         home-manager = home-manager;
       };
-      nixosConfigurations.teeny = import ./git/teeny/flk.nix {
+      nixosConfigurations.teeny = import ./teeny/flk.nix {
         self = self;
         nixpkgs = nixpkgs;
         old-nixpkgs = old-nixpkgs;

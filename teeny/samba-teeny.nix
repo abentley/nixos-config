@@ -1,5 +1,5 @@
 { ... }:
-import ../samba.nix {
+import ../features/samba.nix {
   name = "teeny";
   shares = {
     "music" = {
