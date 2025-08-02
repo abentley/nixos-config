@@ -19,7 +19,7 @@
       nixos-wsl,
     }:
     {
-      nixosConfigurations.thinky = import ./git/thinky/flk.nix {
+      nixosConfigurations.thinky = import ./thinky/flk.nix {
         self = self;
         nixpkgs = nixpkgs;
         home-manager = home-manager;
