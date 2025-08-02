@@ -7,4 +7,11 @@
   boot.loader.grub.useOSProber = true;
 
   networking.hostName = "hp"; # Define your hostname.
+
+  # Install firefox.
+  programs.firefox.enable = true;
+
+  # Allow unfree packages
+  nixpkgs.config.allowUnfree = true;
+
 }
