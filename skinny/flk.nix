@@ -10,7 +10,7 @@ nixpkgs.lib.nixosSystem {
     ../suites/base.nix
     ../suites/graphical.nix
     ../features/hyprland.nix
-    # ../flake-enablement.nix
+    ../features/flake-enablement.nix
     ../features/early-console.nix
     home-manager.nixosModules.home-manager
     {

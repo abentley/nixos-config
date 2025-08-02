@@ -12,7 +12,7 @@ nixpkgs.lib.nixosSystem {
     ../suites/base.nix
     # Not supported on integrated graphics of this machine
     # ../hyprland.nix
-    #../flake-enablement.nix
+    ../features/flake-enablement.nix
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;

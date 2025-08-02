@@ -10,7 +10,7 @@ nixpkgs.lib.nixosSystem {
     ./configuration.nix
     ../suites/base.nix
     ../suites/graphical-non-host.nix
-    # ../flake-enablement.nix
+    ../features/flake-enablement.nix
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
