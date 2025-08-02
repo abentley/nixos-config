@@ -41,7 +41,7 @@
         nixpkgs = nixpkgs;
         home-manager = home-manager;
       };
-      nixosConfigurations.skinny = import ./git/skinny/flk.nix {
+      nixosConfigurations.skinny = import ./skinny/flk.nix {
         self = self;
         nixpkgs = nixpkgs;
         home-manager = home-manager;
