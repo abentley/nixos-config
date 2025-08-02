@@ -18,24 +18,36 @@
       home-manager,
       nixos-wsl,
     }:
+    let
+      # Pass the system attribute directly to the Nixpkgs import.
+      pkgs = import nixpkgs {
+        system = "x86_64-linux";
+        config = { };
+        overlays = [ ];
+      };
+      # Define a list of packages in a central place
+      selection =
+        with pkgs;
+        (import ./suites/base.nix {
+          config = { };
+          pkgs = pkgs;
+        }).environment.systemPackages
+        ++ [
+          neovim
+          # add other packages here
+        ];
+    in
     {
-      packages.x86_64-linux.default =
-        let
-          pkgs = import nixpkgs {
-            config = { };
-            overlays = [ ];
-            system = "x86_64-linux";
-          };
-          selection =
-            (import ./suites/base.nix {
-              config = { };
-              pkgs = pkgs;
-            }).environment.systemPackages
-            ++ [ pkgs.neovim ];
-        in
-        pkgs.mkShellNoCC {
-          packages = selection;
-        };
+      # The devShell output for a temporary environment.
+      devShells.x86_64-linux.default = pkgs.mkShellNoCC {
+        packages = selection;
+      };
+
+      # A separate, installable package that contains all your dev tools.
+      packages.x86_64-linux.default = pkgs.buildEnv {
+        name = "my-dev-tools";
+        paths = selection;
+      };
 
       nixosConfigurations.thinky = import ./thinky/flk.nix {
         self = self;
