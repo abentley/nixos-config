@@ -49,37 +49,11 @@
         paths = selection;
       };
 
-      nixosConfigurations.thinky = import ./thinky/flk.nix {
-        self = self;
-        nixpkgs = nixpkgs;
-        home-manager = home-manager;
-      };
-      nixosConfigurations.teeny = import ./teeny/flk.nix {
-        self = self;
-        nixpkgs = nixpkgs;
-        old-nixpkgs = old-nixpkgs;
-        home-manager = home-manager;
-      };
-      nixosConfigurations.gamey-wsl = import ./gamey-wsl/flk.nix {
-        self = self;
-        nixpkgs = nixpkgs;
-        home-manager = home-manager;
-        nixos-wsl = nixos-wsl;
-      };
-      nixosConfigurations.hp = import ./hp/flk.nix {
-        self = self;
-        nixpkgs = nixpkgs;
-        home-manager = home-manager;
-      };
-      nixosConfigurations.skinny = import ./skinny/flk.nix {
-        self = self;
-        nixpkgs = nixpkgs;
-        home-manager = home-manager;
-      };
-      nixosConfigurations.handy = import ./handy/flk.nix {
-        self = self;
-        nixpkgs = nixpkgs;
-        home-manager = home-manager;
-      };
+      nixosConfigurations.thinky = import ./thinky/flk.nix inputs;
+      nixosConfigurations.teeny = import ./teeny/flk.nix inputs;
+      nixosConfigurations.gamey-wsl = import ./gamey-wsl/flk.nix inputs;
+      nixosConfigurations.hp = import ./hp/flk.nix inputs;
+      nixosConfigurations.skinny = import ./skinny/flk.nix inputs;
+      nixosConfigurations.handy = import ./handy/flk.nix inputs;
     };
 }
