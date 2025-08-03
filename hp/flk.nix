@@ -4,13 +4,31 @@
   home-manager,
   ...
 }:
+let
+  custom = (
+    { config, pkgs, ... }:
+
+    {
+      # Bootloader.
+      boot.loader.grub.device = "/dev/sda";
+
+      networking.hostName = "hp"; # Define your hostname.
+
+      # Install firefox.
+      programs.firefox.enable = true;
+
+      # Allow unfree packages
+      nixpkgs.config.allowUnfree = true;
+
+    }
+  );
+in
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
     ../base-configuration.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
-    ./specific.nix
     ../suites/graphical-computer.nix
     ../suites/base.nix
     # Not supported on integrated graphics of this machine
@@ -19,6 +37,7 @@ nixpkgs.lib.nixosSystem {
     ../features/grub.nix
     home-manager.nixosModules.home-manager
     (import ../features/home-manager.nix)
+    custom
   ];
   specialArgs = {
     primaryUser = "abentley";

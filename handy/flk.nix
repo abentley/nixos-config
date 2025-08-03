@@ -5,7 +5,7 @@
   ...
 }:
 let
-  specifics = (
+  custom = (
     { config, pkgs, ... }:
     {
       # Bootloader.
@@ -51,7 +51,7 @@ nixpkgs.lib.nixosSystem {
     ../features/early-console.nix
     home-manager.nixosModules.home-manager
     (import ../features/home-manager.nix)
-    specifics
+    custom
   ];
   specialArgs = {
     primaryUser = "abentley";
