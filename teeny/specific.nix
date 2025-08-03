@@ -5,8 +5,6 @@
 
   # Bootloader.
   boot.loader.grub = {
-    enable = true;
-    useOSProber = true;
     gfxmodeBios = "1920x1080x32";
     splashImage = ./darktrees.png;
   };

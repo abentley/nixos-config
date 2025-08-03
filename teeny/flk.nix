@@ -12,6 +12,7 @@ nixpkgs.lib.nixosSystem {
     ../suites/graphical-computer.nix
     ../features/jellyfin.nix
     ../features/incus.nix
+    ../features/grub.nix
     ./teeny.nix
     ../suites/base.nix
     #      ../features/podman.nix

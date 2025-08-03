@@ -2,11 +2,9 @@
 {
   # Bootloader.
   boot.loader.grub = {
-    enable = true;
     device = "nodev";
     efiSupport = true;
     gfxmodeEfi = "1366x768x32";
-    useOSProber = true;
     # efiInstallAsRemovable = true;
     splashImage = "/home/abentley/treemoon2.png";
     # font = "${pkgs.hack-font}/share/fonts/hack/Hack-Regular.ttf";

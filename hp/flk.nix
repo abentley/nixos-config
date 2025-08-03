@@ -15,6 +15,7 @@ nixpkgs.lib.nixosSystem {
     # Not supported on integrated graphics of this machine
     # ../hyprland.nix
     ../features/flake-enablement.nix
+    ../features/grub.nix
     home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;

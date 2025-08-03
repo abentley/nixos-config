@@ -13,6 +13,7 @@ nixpkgs.lib.nixosSystem {
     ../suites/base.nix
     ../suites/graphical-computer.nix
     ../suites/audio-production.nix
+    ../features/grub.nix
     ../features/hyprland.nix
     ../features/early-console.nix
     home-manager.nixosModules.home-manager
