@@ -13,13 +13,7 @@ nixpkgs.lib.nixosSystem {
     ../suites/graphical.nix
     ../features/flake-enablement.nix
     home-manager.nixosModules.home-manager
-    {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.users.abentley = ../users/abentley.nix;
-      home-manager.users.root = ../users/root.nix;
-      home-manager.backupFileExtension = "backup";
-    }
+    (import ../features/home-manager.nix)
     nixos-wsl.nixosModules.default
     {
       system.stateVersion = "24.11";

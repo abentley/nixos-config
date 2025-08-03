@@ -17,13 +17,7 @@ nixpkgs.lib.nixosSystem {
     ../features/flake-enablement.nix
     ../features/early-console.nix
     home-manager.nixosModules.home-manager
-    {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.users.abentley = ../users/abentley.nix;
-      home-manager.users.root = ../users/root.nix;
-      home-manager.backupFileExtension = "backup";
-    }
+    (import ../features/home-manager.nix)
   ];
   specialArgs = {
     primaryUser = "abentley";

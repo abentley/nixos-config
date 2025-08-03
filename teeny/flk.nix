@@ -23,13 +23,7 @@ nixpkgs.lib.nixosSystem {
     ../features/early-console.nix
     ../base-configuration.nix
     home-manager.nixosModules.home-manager
-    {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.users.abentley = ../users/abentley.nix;
-      home-manager.users.root = ../users/root.nix;
-      home-manager.backupFileExtension = "backup";
-    }
+    (import ../features/home-manager.nix)
   ];
   specialArgs = {
     primaryUser = "abentley";
