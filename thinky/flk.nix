@@ -72,6 +72,7 @@ nixpkgs.lib.nixosSystem {
     ../features/grub.nix
     ../features/hyprland.nix
     ../features/early-console.nix
+    ../features/flake-enablement.nix
     home-manager.nixosModules.home-manager
     (import ../features/home-manager.nix)
     custom
