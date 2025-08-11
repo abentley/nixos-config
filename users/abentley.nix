@@ -11,6 +11,8 @@
     nickname = "abentley"
     server = "irc.libera.chat"
     channels = ["#halloy"]
+    [font]
+    size = 24
   '';
   home.file.".config/hypr/shared.conf".source = ../config/hypr/shared.conf;
   home.file.".config/hypr/nix.conf".source = ../config/hypr/nix.conf;
