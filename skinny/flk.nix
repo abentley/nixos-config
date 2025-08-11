@@ -7,25 +7,17 @@
 let
   custom = ({
     # Bootloader.
-    boot.loader.systemd-boot = {
-      enable = true;
-      consoleMode = "0";
+    boot = {
+      loader.systemd-boot.consoleMode = "0";
+      initrd.kernelModules = [ "i915" ];
     };
-    boot.loader.efi.canTouchEfiVariables = true;
-
     networking.hostName = "skinny"; # Define your hostname.
-
-    # Install firefox.
-    programs.firefox.enable = true;
-
-    # Allow unfree packages
-    nixpkgs.config.allowUnfree = true;
-
   });
 in
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
+    ../features/systemd-boot.nix
     ../base-configuration.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix

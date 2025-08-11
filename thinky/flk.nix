@@ -9,21 +9,24 @@ let
     { config, pkgs, ... }:
     {
       # Bootloader.
-      boot.loader.grub = {
-        device = "nodev";
-        efiSupport = true;
-        gfxmodeEfi = "1366x768x32";
-        # efiInstallAsRemovable = true;
-        splashImage = "/home/abentley/treemoon2.png";
-        # font = "${pkgs.hack-font}/share/fonts/hack/Hack-Regular.ttf";
-        # fontSize = 24;
+      boot = {
+        loader = {
+          grub = {
+            device = "nodev";
+            efiSupport = true;
+            gfxmodeEfi = "1366x768x32";
+            # efiInstallAsRemovable = true;
+            splashImage = "/home/abentley/treemoon2.png";
+            # font = "${pkgs.hack-font}/share/fonts/hack/Hack-Regular.ttf";
+            # fontSize = 24;
+          };
+          efi.canTouchEfiVariables = true;
+        };
+        initrd.kernelModules = [ "i915" ];
       };
-      boot.initrd.kernelModules = [ "i915" ];
 
       # boot.loader.systemd-boot.enable = true;
       # Conflicts with boot.loader.grub.efiInstallAsRemovable = true;
-      boot.loader.efi.canTouchEfiVariables = true;
-
       # boot.plymouth.enable = true;
 
       networking.hostName = "thinky"; # Define your hostname.
@@ -40,23 +43,9 @@ let
         LC_TIME = "en_US.UTF-8";
       };
 
-      # Enable the X11 windowing system.
-      services.xserver.enable = true;
-
-      # Configure keymap in X11
-      services.xserver.xkb = {
-        layout = "us";
-        variant = "";
-      };
       environment.systemPackages = with pkgs; [
         shotwell
       ];
-      # Install firefox.
-      programs.firefox.enable = true;
-
-      # Allow unfree packages
-      nixpkgs.config.allowUnfree = true;
-
     }
   );
 in
