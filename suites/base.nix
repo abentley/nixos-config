@@ -38,6 +38,7 @@
     pciutils
     pkg-config
     python3
+    python3Packages.pygments
     ripgrep
     squashfsTools
     stdenv
