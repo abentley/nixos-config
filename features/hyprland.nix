@@ -39,4 +39,10 @@
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
+
+  services.logind = {
+    lidSwitch = "suspend";
+    lidSwitchDocked = "ignore";
+    lidSwitchExternalPower = "suspend";
+  };
 }
