@@ -15,4 +15,5 @@
     size = 24
   '';
   home.file.".local/share/applications/beeper.desktop".source = ../config/applications/beeper.desktop;
+  home.file.".config/kitty/kitty.conf".source = ../config/kitty.conf;
 }
