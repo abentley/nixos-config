@@ -59,11 +59,11 @@ nixpkgs.lib.nixosSystem {
     ../suites/graphical-computer.nix
     ../suites/audio-production.nix
     ../features/grub.nix
+    ../features/home-manager.nix
     ../features/hyprland.nix
     ../features/early-console.nix
     ../features/flake-enablement.nix
     home-manager.nixosModules.home-manager
-    (import ../features/home-manager.nix)
     custom
   ];
   specialArgs = {

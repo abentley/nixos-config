@@ -45,4 +45,18 @@
     lidSwitchDocked = "ignore";
     lidSwitchExternalPower = "suspend";
   };
+  home-manager.users.abentley = {
+    home.file.".config/hypr/shared.conf".source = ../config/hypr/shared.conf;
+    home.file.".config/hypr/nix.conf".source = ../config/hypr/nix.conf;
+    home.file.".config/hypr/autorotate.conf".source = ../config/hypr/autorotate.conf;
+    home.file.".config/waybar/config.jsonc".source = ../config/waybar/config.jsonc;
+    home.file.".config/waybar/style.css".source = ../config/waybar/style.css;
+    home.file.".config/waybar/power_menu.xml".source = ../config/waybar/power_menu.xml;
+    home.file.".config/kitty/kitty.conf".source = ../config/kitty.conf;
+    home.file.".config/walker/config.toml".source = ../config/walker/config.toml;
+    home.file.".config/walker/themes/default.toml".source = ../config/walker/themes/default.toml;
+    home.file.".config/walker/themes/default.css".source = ../config/walker/themes/default.css;
+    home.file.".config/walker/themes/default_window.toml".source =
+      ../config/walker/themes/default_window.toml;
+  };
 }
