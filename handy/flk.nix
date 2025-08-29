@@ -11,9 +11,18 @@ let
       # Bootloader.
       boot = {
         initrd.kernelModules = [ "i915" ];
-        loader.systemd-boot.consoleMode = "auto";
+        loader.grub = {
+          device = "nodev";
+          efiSupport = true;
+          splashImage = ../teeny/darktrees.png;
+          gfxmodeEfi = "1280x720x32";
+        };
+        loader.efi.canTouchEfiVariables = true;
       };
       networking.hostName = "handy"; # Define your hostname.
+      environment.systemPackages = with pkgs; [
+        efibootmgr
+      ];
     }
   );
 in
@@ -26,11 +35,11 @@ nixpkgs.lib.nixosSystem {
     ../suites/base.nix
     ../suites/graphical-computer.nix
     ../suites/audio-production.nix
+    ../features/grub.nix
     ../features/hyprland.nix
     ../features/flake-enablement.nix
     ../features/early-console.nix
     ../features/steam.nix
-    ../features/systemd-boot.nix
     home-manager.nixosModules.home-manager
     (import ../features/home-manager.nix)
     custom
