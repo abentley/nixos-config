@@ -2,15 +2,19 @@
 
 {
   environment.systemPackages = with pkgs; [
+    ardour
     audacious
     audacious-plugins
-    qsynth
-    qjackctl
     audacity
-    ardour
-    soundfont-generaluser
-    soundfont-fluid
+    flac # Provides metaflac
     jamulus
+    loudgain
+    python3Packages.mutagen
+    qjackctl
+    qsynth
+    soundfont-fluid
+    soundfont-generaluser
+    sox
   ];
   services.pipewire.jack.enable = true;
 }
