@@ -28,6 +28,7 @@
     pkgs.bibata-cursors
     pkgs.adwaita-icon-theme
     pkgs.blueman
+    pkgs.kanshi
   ];
   users.users.${primaryUser}.extraGroups = [
     # video is needed for udevd to permit brightness control
@@ -57,5 +58,6 @@
     home.file.".config/walker/themes/default.css".source = ../config/walker/themes/default.css;
     home.file.".config/walker/themes/default_window.toml".source =
       ../config/walker/themes/default_window.toml;
+    home.file.".config/kanshi/config".source = ../config/kanshi/config;
   };
 }

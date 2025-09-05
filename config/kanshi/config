@@ -1,0 +1,16 @@
+profile 3-monitor {
+  output eDP-1 mode 1920x1200 position -1280,400 scale 1.5
+  output "Dell Inc. DELL U2713HM 7JNY53CIA5JS" mode 2560x1440 position 0,0 scale 1
+  output "Hewlett Packard HP 27es 3CM6480MDK   " mode 1920x1080 position 2560,400 scale 0.833333
+}
+profile dell-builtin {
+  output eDP-1 mode 1920x1200 position -1280,400 scale 1.5
+  output "Dell Inc. DELL U2713HM 7JNY53CIA5JS" mode 2560x1440 position 0,0 scale 1
+}
+profile hp-builtin {
+  output eDP-1 mode 1920x1200 position -1280,400 scale 1.5
+  output "Hewlett Packard HP 27es 3CM6480MDK   " mode 1920x1080 position 0,0 scale 0.833333
+}
+profile builtin-only {
+  output eDP-1 mode 1920x1200@60Hz position 0,0 scale 1
+}
