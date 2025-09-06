@@ -49,6 +49,7 @@
         paths = selection;
       };
 
+      nixosConfigurations.lappy = import ./lappy/flk.nix inputs;
       nixosConfigurations.thinky = import ./thinky/flk.nix inputs;
       nixosConfigurations.teeny = import ./teeny/flk.nix inputs;
       nixosConfigurations.gamey-wsl = import ./gamey-wsl/flk.nix inputs;
