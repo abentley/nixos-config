@@ -14,7 +14,10 @@ nixpkgs.lib.nixosSystem {
     ../suites/base.nix
     ../suites/graphical-computer.nix
     ../features/flake-enablement.nix
+    ../features/grub.nix
     ./hardware-configuration.nix
+    home-manager.nixosModules.home-manager
+    (import ../features/home-manager.nix)
     (
       { config, pkgs, ... }:
 
@@ -24,9 +27,13 @@ nixpkgs.lib.nixosSystem {
         ];
 
         # Bootloader.
-        boot.loader.grub.enable = true;
-        boot.loader.grub.device = "/dev/sda";
-        boot.loader.grub.useOSProber = true;
+        boot = {
+          initrd.kernelModules = [ "i915" ];
+          loader.grub = {
+            device = "/dev/sda";
+            splashImage = ../teeny/darktrees.png;
+          };
+        };
 
         networking.hostName = "lappy"; # Define your hostname.
         # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -67,4 +74,7 @@ nixpkgs.lib.nixosSystem {
       }
     )
   ];
+  specialArgs = {
+    primaryUser = "abentley";
+  };
 }
