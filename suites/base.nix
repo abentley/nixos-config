@@ -38,6 +38,8 @@
     pciutils
     pkg-config
     python3
+    python3Packages.autopep8
+    python3Packages.flake8
     python3Packages.pygments
     ripgrep
     squashfsTools
