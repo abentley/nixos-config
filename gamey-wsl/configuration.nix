@@ -19,6 +19,7 @@
 
   wsl.enable = true;
   wsl.defaultUser = "abentley";
+  wsl.tarball.configPath = ../.
   networking.hostName = "gamey-wsl";
 
   # This value determines the NixOS release from which the default
