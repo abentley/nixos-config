@@ -3,7 +3,7 @@
   programs = {
     git.enable = true;
     mtr.enable = true;
-  # Install neovim
+    # Install neovim
     neovim = {
       enable = true;
       defaultEditor = true;

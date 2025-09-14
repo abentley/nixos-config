@@ -2,31 +2,38 @@
 {
   programs.hyprland.enable = true;
   environment.systemPackages = [
+    pkgs.adwaita-icon-theme
+    # Cursor set
+    pkgs.bibata-cursors
+    # Needed for brightness in hyprland
+    pkgs.brightnessctl
+    pkgs.hyprcursor
+    # Suggested session locker
+    # pkgs.hyprlock
     # Automate plug/unplug behaviour
     pkgs.kanshi
     pkgs.kitty
-    pkgs.wofi
-    pkgs.walker
-    # Animated wallpaper
-    pkgs.swww
-    # Clipboard functionality?
-    pkgs.wl-clipboard
-    # Needed for volume in hyprland
-    pkgs.pulseaudio
-    # Needed for brightness in hyprland
-    pkgs.brightnessctl
     # Provides nm-connection-editor
     pkgs.networkmanagerapplet
     # Dock
     pkgs.nwg-dock-hyprland
+    # Suggested notification agent.
+    # pkgs.mako
     pkgs.pavucontrol
+    # Needed for volume in hyprland
+    pkgs.pulseaudio
+    # Suggested idle lock
+    # pkgs.swayidle
+    # Animated wallpaper
+    pkgs.swww
+    pkgs.walker
+    pkgs.wofi
+    # Clipboard functionality?
+    pkgs.wl-clipboard
     # Find key symbols
     pkgs.xorg.xev
-    pkgs.hyprcursor
-    # Cursor set
-    pkgs.bibata-cursors
-    pkgs.adwaita-icon-theme
   ];
+
   users.users.${primaryUser}.extraGroups = [
     # video is needed for udevd to permit brightness control
     "video"
