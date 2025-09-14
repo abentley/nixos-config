@@ -13,4 +13,6 @@
     se listchars=tab:>.,trail:-
     autocmd FileType nix se shiftwidth=2
   '';
+  vimAlias = true;
+  viAlias = true;
 }

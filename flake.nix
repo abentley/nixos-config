@@ -33,7 +33,6 @@
           pkgs = pkgs;
         }).environment.systemPackages
         ++ [
-          neovim
           # add other packages here
         ];
     in
