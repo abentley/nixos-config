@@ -1,13 +1,16 @@
 { config, pkgs, ... }:
 {
+  programs = {
+    git.enable = true;
+    mtr.enable = true;
   # Install neovim
-  programs.neovim = {
-    enable = true;
-    defaultEditor = true;
-    viAlias = true;
+    neovim = {
+      enable = true;
+      defaultEditor = true;
+      viAlias = true;
+    };
+    tmux.enable = true;
   };
-
-  programs.tmux.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
@@ -21,7 +24,7 @@
     file
     gcc
     gccStdenv
-    git
+    gemini-cli
     graphviz
     htop
     just

@@ -2,16 +2,15 @@
 {
   programs.hyprland.enable = true;
   environment.systemPackages = [
+    # Automate plug/unplug behaviour
+    pkgs.kanshi
     pkgs.kitty
     pkgs.wofi
     pkgs.walker
     # Animated wallpaper
     pkgs.swww
-    # Automate plug/unplug behaviour
-    pkgs.kanshi
     # Clipboard functionality?
     pkgs.wl-clipboard
-    pkgs.waybar
     # Needed for volume in hyprland
     pkgs.pulseaudio
     # Needed for brightness in hyprland
@@ -27,8 +26,6 @@
     # Cursor set
     pkgs.bibata-cursors
     pkgs.adwaita-icon-theme
-    pkgs.blueman
-    pkgs.kanshi
   ];
   users.users.${primaryUser}.extraGroups = [
     # video is needed for udevd to permit brightness control
@@ -40,6 +37,7 @@
     enable = true;
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
   };
+  services.blueman.enable = true;
 
   services.logind = {
     lidSwitch = "suspend";
@@ -59,5 +57,8 @@
     home.file.".config/walker/themes/default_window.toml".source =
       ../config/walker/themes/default_window.toml;
     home.file.".config/kanshi/config".source = ../config/kanshi/config;
+  };
+  programs = {
+    waybar.enable = true;
   };
 }

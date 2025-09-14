@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 {
+  programs.wireshark.enable = true;
   # Enable "Desktop sharing"
   services.gnome.gnome-remote-desktop.enable = true;
 
@@ -12,7 +13,6 @@
   environment.systemPackages = with pkgs; [
     baobab
     halloy
-    wireshark
     meld
     mtr-gui
   ];
