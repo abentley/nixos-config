@@ -12,9 +12,6 @@ nixpkgs.lib.nixosSystem {
     ./configuration.nix
     ../suites/base.nix
     ../suites/graphical.nix
-    ./configuration.nix
-    ../suites/base.nix
-    ../suites/graphical.nix
     home-manager.nixosModules.home-manager
     nixos-wsl.nixosModules.default
     ../features/options.nix # Add the new options file

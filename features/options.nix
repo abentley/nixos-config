@@ -83,6 +83,10 @@
     systemdBoot = {
       enable = lib.mkEnableOption "Enable systemd-boot.";
     };
+
+    wsl = {
+      enable = lib.mkEnableOption "Enable WSL.";
+    };
   };
 
   config = lib.mkMerge [
@@ -262,6 +266,12 @@
     (lib.mkIf config.myFeatures.systemdBoot.enable {
       boot.loader.systemd-boot.enable = true;
       boot.loader.efi.canTouchEfiVariables = true;
+    })
+    # systemd-boot feature
+    (lib.mkIf config.myFeatures.wsl.enable {
+      wsl.enable = true;
+      wsl.defaultUser = "abentley";
+      wsl.tarball.configPath = ../.;
     })
   ];
 }
