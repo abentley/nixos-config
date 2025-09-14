@@ -32,21 +32,31 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ../base-configuration.nix
     ./hardware-configuration.nix
-    ../features/auto-rotation.nix
+    ../base-configuration.nix
+    ./hardware-configuration.nix
     ../suites/base.nix
     ../suites/graphical-computer.nix
     ../suites/audio-production.nix
-    ../features/grub.nix
-    ../features/hyprland.nix
-    ../features/flake-enablement.nix
-    ../features/early-console.nix
-    ../features/steam.nix
     home-manager.nixosModules.home-manager
-    (import ../features/home-manager.nix)
+    ../features/options.nix # Add the new options file
     custom
+    {
+      # Enable features
+      myFeatures = {
+        autoRotation.enable = true;
+        grub.enable = true;
+        hyprland = {
+          enable = true;
+          primaryUser = "abentley";
+        };
+        flakeEnablement.enable = true;
+        earlyConsole = {
+          enable = true;
+          consoleFontName = "terminus";
+        };
+        steam.enable = true;
+        homeManager.enable = true;
+      };
+    }
   ];
-  specialArgs = {
-    primaryUser = "abentley";
-    consoleFontName = "terminus";
-  };
 }

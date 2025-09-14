@@ -8,7 +8,12 @@
 }:
 let
   custom = (
-    { config, pkgs, lib, ... }:
+    {
+      config,
+      pkgs,
+      lib,
+      ...
+    }:
     let
       zfsCompatibleKernelPackages = lib.filterAttrs (
         name: kernelPackages:
@@ -21,7 +26,8 @@ let
           builtins.attrValues zfsCompatibleKernelPackages
         )
       );
-    in {
+    in
+    {
       # Note this might jump back and forth as kernels are added or removed.
       boot.kernelPackages = latestKernelPackage;
       # Bootloader.
@@ -52,20 +58,20 @@ let
         options = [ "nofail" ];
       };
 
-  fileSystems."/mnt/250G" = {
-    device = "/dev/disk/by-uuid/b1724b65-c2ac-4d18-905b-9dfd1058339a";
-    fsType = "ext4";
-    options = [ "noauto" ];
-  };
-  networking.hostName = "teeny"; # Define your hostname.
-  # Required for zfs
-  networking.hostId = "21d28d23";
+      fileSystems."/mnt/250G" = {
+        device = "/dev/disk/by-uuid/b1724b65-c2ac-4d18-905b-9dfd1058339a";
+        fsType = "ext4";
+        options = [ "noauto" ];
+      };
+      networking.hostName = "teeny"; # Define your hostname.
+      # Required for zfs
+      networking.hostId = "21d28d23";
 
-  # This is more of a graphical-server config, but I only have one of those.
-  services.xserver.displayManager.gdm.autoSuspend = false;
-  environment.systemPackages = [
-    pkgs.mplayer
-  ];
+      # This is more of a graphical-server config, but I only have one of those.
+      services.xserver.displayManager.gdm.autoSuspend = false;
+      environment.systemPackages = [
+        pkgs.mplayer
+      ];
 
       virtualisation.docker.enable = true;
       users.users = {
@@ -80,23 +86,50 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ./hardware-configuration.nix
     ../suites/graphical-computer.nix
-    ../features/jellyfin.nix
-    ../features/incus.nix
-    ../features/grub.nix
     ../suites/base.nix
-    #      ../features/podman.nix
-    ./samba-teeny.nix
-    # ../../samba-vr.nix
-    ../features/hyprland.nix
-    ../features/early-console.nix
     ../base-configuration.nix
     home-manager.nixosModules.home-manager
-    (import ../features/home-manager.nix)
+    ../features/options.nix # Add the new options file
     custom
+    {
+      # Enable features
+      myFeatures = {
+        jellyfin = {
+          enable = true;
+          primaryUser = "abentley";
+        };
+        incus = {
+          enable = true;
+          primaryUser = "abentley";
+        };
+        grub.enable = true;
+        # podman.enable = true; # If it was intended to be enabled
+        samba = {
+          enable = true;
+          name = "teeny";
+          shares = {
+            "music" = {
+              "path" = "/mnt/bcachefs/Music";
+              "browseable" = "yes";
+              "read only" = "yes";
+              "guest ok" = "yes";
+              "create mask" = "0644";
+              "directory mask" = "0755";
+              "force user" = "jellyfin";
+              "force group" = "jellyfin";
+            };
+          };
+        };
+        hyprland = {
+          enable = true;
+          primaryUser = "abentley";
+        };
+        earlyConsole = {
+          enable = true;
+          consoleFontName = "spleen";
+        };
+        homeManager.enable = true;
+      };
+    }
   ];
-  specialArgs = {
-    primaryUser = "abentley";
-    old-nixpkgs = old-nixpkgs;
-    consoleFontName = "spleen";
-  };
 }

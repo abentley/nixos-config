@@ -12,13 +12,20 @@ nixpkgs.lib.nixosSystem {
     ./configuration.nix
     ../suites/base.nix
     ../suites/graphical.nix
-    ../features/flake-enablement.nix
+    ./configuration.nix
+    ../suites/base.nix
+    ../suites/graphical.nix
     home-manager.nixosModules.home-manager
-    (import ../features/home-manager.nix)
     nixos-wsl.nixosModules.default
+    ../features/options.nix # Add the new options file
     {
       system.stateVersion = "24.11";
       wsl.enable = true;
+      # Enable features
+      myFeatures = {
+        flakeEnablement.enable = true;
+        homeManager.enable = true;
+      };
     }
   ];
   specialArgs = {

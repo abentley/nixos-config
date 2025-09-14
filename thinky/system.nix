@@ -59,16 +59,24 @@ nixpkgs.lib.nixosSystem {
     ../suites/base.nix
     ../suites/graphical-computer.nix
     ../suites/audio-production.nix
-    ../features/grub.nix
-    ../features/home-manager.nix
-    ../features/hyprland.nix
-    ../features/early-console.nix
-    ../features/flake-enablement.nix
+    ../features/options.nix # Add the new options file
     home-manager.nixosModules.home-manager
     custom
+    {
+      # Enable features
+      myFeatures = {
+        grub.enable = true;
+        homeManager.enable = true;
+        hyprland = {
+          enable = true;
+          primaryUser = "abentley"; # Set primaryUser for hyprland
+        };
+        earlyConsole = {
+          enable = true;
+          consoleFontName = "spleen"; # Set consoleFontName for earlyConsole
+        };
+        flakeEnablement.enable = true;
+      };
+    }
   ];
-  specialArgs = {
-    primaryUser = "abentley";
-    consoleFontName = "spleen";
-  };
 }

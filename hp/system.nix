@@ -25,13 +25,23 @@ nixpkgs.lib.nixosSystem {
     ../suites/base.nix
     # Not supported on integrated graphics of this machine
     # ../hyprland.nix
-    ../features/flake-enablement.nix
-    ../features/grub.nix
+    ../base-configuration.nix
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+    ../suites/graphical-computer.nix
+    ../suites/base.nix
+    # Not supported on integrated graphics of this machine
+    # ../hyprland.nix
     home-manager.nixosModules.home-manager
-    (import ../features/home-manager.nix)
+    ../features/options.nix # Add the new options file
     custom
+    {
+      # Enable features
+      myFeatures = {
+        flakeEnablement.enable = true;
+        grub.enable = true;
+        homeManager.enable = true;
+      };
+    }
   ];
-  specialArgs = {
-    primaryUser = "abentley";
-  };
 }

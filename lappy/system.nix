@@ -13,11 +13,12 @@ nixpkgs.lib.nixosSystem {
     ../base-configuration.nix
     ../suites/base.nix
     ../suites/graphical-computer.nix
-    ../features/flake-enablement.nix
-    ../features/grub.nix
+    ../base-configuration.nix
+    ../suites/base.nix
+    ../suites/graphical-computer.nix
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
-    (import ../features/home-manager.nix)
+    ../features/options.nix # Add the new options file
     (
       { config, pkgs, ... }:
 
@@ -71,10 +72,13 @@ nixpkgs.lib.nixosSystem {
         # Or disable the firewall altogether.
         # networking.firewall.enable = false;
 
+        # Enable features
+        myFeatures = {
+          flakeEnablement.enable = true;
+          grub.enable = true;
+          homeManager.enable = true;
+        };
       }
     )
   ];
-  specialArgs = {
-    primaryUser = "abentley";
-  };
 }

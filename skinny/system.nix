@@ -18,21 +18,29 @@ in
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
-    ../features/systemd-boot.nix
     ../base-configuration.nix
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../suites/base.nix
     ../suites/graphical-computer.nix
-    ../features/hyprland.nix
-    ../features/flake-enablement.nix
-    ../features/early-console.nix
     home-manager.nixosModules.home-manager
-    (import ../features/home-manager.nix)
+    ../features/options.nix # Add the new options file
     custom
+    {
+      # Enable features
+      myFeatures = {
+        systemdBoot.enable = true;
+        hyprland = {
+          enable = true;
+          primaryUser = "abentley";
+        };
+        flakeEnablement.enable = true;
+        earlyConsole = {
+          enable = true;
+          consoleFontName = "terminus";
+        };
+        homeManager.enable = true;
+      };
+    }
   ];
-  specialArgs = {
-    primaryUser = "abentley";
-    consoleFontName = "terminus";
-  };
 }
