@@ -9,21 +9,7 @@ let
   custom = (
     { config, pkgs, ... }:
     {
-      # Bootloader.
-      boot = {
-        initrd.kernelModules = [ "i915" ];
-        loader.grub = {
-          device = "nodev";
-          efiSupport = true;
-          splashImage = ../teeny/darktrees.png;
-          gfxmodeEfi = "1280x720x32";
-        };
-        loader.efi.canTouchEfiVariables = true;
-      };
       networking.hostName = "handy"; # Define your hostname.
-      environment.systemPackages = with pkgs; [
-        efibootmgr
-      ];
     }
   );
 in
@@ -44,7 +30,12 @@ nixpkgs.lib.nixosSystem {
       # Enable features
       myFeatures = {
         autoRotation.enable = true;
-        grub.enable = true;
+        grub = {
+          enable = true;
+          bootMode = "efi"; # Assuming EFI for handy
+          resolution = "1280x720x32";
+          splashImage = ../teeny/darktrees.png;
+        };
         hyprland = {
           enable = true;
           primaryUser = "abentley";

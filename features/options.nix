@@ -27,6 +27,26 @@
 
     grub = {
       enable = lib.mkEnableOption "Configure the GRUB bootloader.";
+      bootMode = lib.mkOption {
+        type = lib.types.nullOr (
+          lib.types.enum [
+            "efi"
+            "bios"
+          ]
+        );
+        default = null;
+        description = "The boot mode for GRUB (EFI or BIOS). Nullable.";
+      };
+      resolution = lib.mkOption {
+        type = lib.types.nullOr lib.types.str;
+        default = null;
+        description = "The GRUB resolution (e.g., \"1920x1080\"). Nullable.";
+      };
+      splashImage = lib.mkOption {
+        type = lib.types.nullOr lib.types.path;
+        default = null;
+        description = "The path to the GRUB splash image. Nullable.";
+      };
     };
 
     homeManager = {
@@ -132,10 +152,31 @@
       ];
     })
 
-    # GRUB feature
-    (lib.mkIf config.myFeatures.grub.enable {
-      boot.loader.grub.enable = true;
-      boot.loader.grub.useOSProber = true;
+    # GRUB feature (EFI)
+    (lib.mkIf (config.myFeatures.grub.enable && config.myFeatures.grub.bootMode == "efi") {
+      boot.loader.grub = {
+        enable = true;
+        useOSProber = true;
+        device = "nodev";
+        efiSupport = true;
+        splashImage = config.myFeatures.grub.splashImage;
+        gfxmodeEfi = config.myFeatures.grub.resolution;
+      };
+      boot.loader.efi.canTouchEfiVariables = true;
+      environment.systemPackages = with pkgs; [
+        efibootmgr
+      ];
+    })
+
+    # GRUB feature (BIOS)
+    (lib.mkIf (config.myFeatures.grub.enable && config.myFeatures.grub.bootMode == "bios") {
+      boot.loader.grub = {
+        enable = true;
+        useOSProber = true;
+        device = "/dev/sda"; # Generic device for BIOS boot
+        splashImage = config.myFeatures.grub.splashImage;
+        gfxmodeBios = config.myFeatures.grub.resolution;
+      };
     })
 
     # Home Manager feature

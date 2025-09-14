@@ -12,15 +12,10 @@ let
       # Bootloader.
       boot = {
         loader = {
-          grub = {
-            device = "nodev";
-            efiSupport = true;
-            gfxmodeEfi = "1366x768x32";
-            # efiInstallAsRemovable = true;
-            splashImage = "/home/abentley/treemoon2.png";
-            # font = "${pkgs.hack-font}/share/fonts/hack/Hack-Regular.ttf";
-            # fontSize = 24;
-          };
+          # grub.efiInstallAsRemovable = true;
+          # grub.font = "${pkgs.hack-font}/share/fonts/hack/Hack-Regular.ttf";
+          # grub.fontSize = 24;
+
           efi.canTouchEfiVariables = true;
         };
         initrd.kernelModules = [ "i915" ];
@@ -65,7 +60,12 @@ nixpkgs.lib.nixosSystem {
     {
       # Enable features
       myFeatures = {
-        grub.enable = true;
+        grub = {
+          enable = true;
+          bootMode = "efi";
+          resolution = "1366x768x32";
+          splashImage = "/home/abentley/treemoon2.png";
+        };
         homeManager.enable = true;
         hyprland = {
           enable = true;
