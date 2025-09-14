@@ -1,3 +1,4 @@
+# Provide Incus virtualization as a feature.
 { primaryUser, ... }:
 {
   networking.firewall.trustedInterfaces = [ "incusbr0" ];

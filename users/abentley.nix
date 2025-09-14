@@ -1,3 +1,4 @@
+# Provide a user profile for the abentley user.
 { pkgs, ... }:
 {
   home.stateVersion = "24.11";

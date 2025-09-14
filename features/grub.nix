@@ -1,3 +1,4 @@
+# Provide a feature to configure the GRUB bootloader.
 { config, pkgs, ... }:
 
 {

@@ -1,3 +1,5 @@
+# Provide the Hyprland compositor as a feature, including all the functionality
+# that must be re-implemented to provide similar facilities to GNOME
 { pkgs, primaryUser, ... }:
 {
   programs.hyprland.enable = true;

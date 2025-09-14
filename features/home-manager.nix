@@ -1,3 +1,4 @@
+# Provide Home Manager as a feature.
 {
   home-manager = {
     useGlobalPkgs = true;

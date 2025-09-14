@@ -1,3 +1,4 @@
+# Provide a samba configuration for the teeny machine.
 { ... }:
 import ../features/samba.nix {
   name = "teeny";

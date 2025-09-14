@@ -1,3 +1,4 @@
+# Provide a NixOS system configuration for the thinky machine.
 {
   self,
   nixpkgs,

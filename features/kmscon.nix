@@ -1,3 +1,4 @@
+# Provide kmscon as a feature.
 { config, pkgs, ... }:
 {
   # Disable the standard kernel console setup as kmscon will take over

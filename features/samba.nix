@@ -1,3 +1,4 @@
+# Provide Samba as a feature.
 { name, shares, ... }:
 {
   services.samba = {

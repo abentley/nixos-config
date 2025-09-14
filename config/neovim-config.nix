@@ -1,3 +1,4 @@
+# Provide a Neovim configuration.
 {
   enable = true;
   extraConfig = ''

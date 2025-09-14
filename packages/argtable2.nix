@@ -1,4 +1,4 @@
-# argtable2.nix
+# Provide a Nix package for argtable2.
 {
   pkgs ? import <nixpkgs> { },
 }:

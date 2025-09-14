@@ -1,3 +1,5 @@
+# Provide a base suite of console-based packages and configurations for all
+# systems.
 { config, pkgs, ... }:
 {
   programs = {

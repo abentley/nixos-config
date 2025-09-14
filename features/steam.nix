@@ -1,3 +1,4 @@
+# Provide Steam as a feature.
 { config, pkgs, ... }:
 {
   programs.steam = {

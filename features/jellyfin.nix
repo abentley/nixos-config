@@ -1,3 +1,4 @@
+# Provide Jellyfin media server as a feature.
 {
   pkgs,
   old-nixpkgs,

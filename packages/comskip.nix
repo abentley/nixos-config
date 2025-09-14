@@ -1,4 +1,4 @@
-# default.nix
+# Provide a Nix package for comskip.
 {
   pkgs ? import <nixpkgs> { },
 }:

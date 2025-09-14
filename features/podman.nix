@@ -1,3 +1,4 @@
+# Provide Podman as a feature.
 { pkgs, ... }:
 {
   # Enable common container config files in /etc/containers

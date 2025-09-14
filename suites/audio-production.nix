@@ -1,3 +1,4 @@
+# Provide a suite of packages for audio production.
 { config, pkgs, ... }:
 
 {

@@ -1,3 +1,4 @@
+# Provide a NixOS system configuration for the hp machine.
 {
   self,
   nixpkgs,

@@ -1,3 +1,4 @@
+# Support configuring the console early in the boot process.
 {
   config,
   pkgs,

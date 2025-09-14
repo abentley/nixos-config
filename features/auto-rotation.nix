@@ -1,3 +1,4 @@
+# Provide a feature to enable automatic screen rotation based on system orientation sensors.
 { config, pkgs, ... }:
 
 {
