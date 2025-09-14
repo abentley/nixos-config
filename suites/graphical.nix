@@ -1,3 +1,6 @@
+# Provide configuration that may be useful for a graphical VM or in WSL.
+# Daily-driver programs such as Chrome are excluded because they would be run
+# on the host machine.
 { config, pkgs, ... }:
 {
   programs.wireshark.enable = true;

@@ -1,3 +1,6 @@
+# Provide a fully-functional graphical computer configuration,
+# including daily-driver applications such as Chrome and Discord.
+# GNOME is the base configuration, but Hyperland can be added as a feature.
 { config, pkgs, ... }:
 {
   imports = [ ./graphical.nix ];
