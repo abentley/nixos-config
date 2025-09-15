@@ -26,7 +26,6 @@
     };
 
     grub = {
-      enable = lib.mkEnableOption "Configure the GRUB bootloader.";
       bootMode = lib.mkOption {
         type = lib.types.nullOr (
           lib.types.enum [
@@ -36,6 +35,11 @@
         );
         default = null;
         description = "The boot mode for GRUB (EFI or BIOS). Nullable.";
+      };
+      device = lib.mkOption {
+        type = lib.types.str;
+        default = "/dev/sda"; # A sensible default for BIOS
+        description = "The device to install GRUB to (e.g., \"/dev/sda\"). Only applicable for BIOS boot mode.";
       };
       resolution = lib.mkOption {
         type = lib.types.nullOr lib.types.str;
@@ -153,7 +157,7 @@
     })
 
     # GRUB feature (EFI)
-    (lib.mkIf (config.myFeatures.grub.enable && config.myFeatures.grub.bootMode == "efi") {
+    (lib.mkIf (config.myFeatures.grub.bootMode == "efi") {
       boot.loader.grub = {
         enable = true;
         useOSProber = true;
@@ -169,13 +173,14 @@
     })
 
     # GRUB feature (BIOS)
-    (lib.mkIf (config.myFeatures.grub.enable && config.myFeatures.grub.bootMode == "bios") {
+    (lib.mkIf (config.myFeatures.grub.bootMode == "bios") {
       boot.loader.grub = {
         enable = true;
         useOSProber = true;
-        device = "/dev/sda"; # Generic device for BIOS boot
+        device = config.myFeatures.grub.device; # Use the configurable device
         splashImage = config.myFeatures.grub.splashImage;
-        gfxmodeBios = config.myFeatures.grub.resolution;
+        gfxmodeBios =
+          if config.myFeatures.grub.resolution == null then "1024x768" else config.myFeatures.grub.resolution;
       };
     })
 

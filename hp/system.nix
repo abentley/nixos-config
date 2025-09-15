@@ -9,8 +9,6 @@ let
   custom = (
     { config, pkgs, ... }:
     {
-      # Bootloader.
-      boot.loader.grub.device = "/dev/sda";
       networking.hostName = "hp"; # Define your hostname.
     }
   );
@@ -39,7 +37,10 @@ nixpkgs.lib.nixosSystem {
       # Enable features
       myFeatures = {
         flakeEnablement.enable = true;
-        grub.enable = true;
+        # Bootloader.
+        grub = {
+          bootMode = "bios";
+        };
         homeManager.enable = true;
       };
     }

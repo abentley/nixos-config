@@ -30,10 +30,6 @@ nixpkgs.lib.nixosSystem {
         # Bootloader.
         boot = {
           initrd.kernelModules = [ "i915" ];
-          loader.grub = {
-            device = "/dev/sda";
-            splashImage = ../teeny/darktrees.png;
-          };
         };
 
         networking.hostName = "lappy"; # Define your hostname.
@@ -75,7 +71,10 @@ nixpkgs.lib.nixosSystem {
         # Enable features
         myFeatures = {
           flakeEnablement.enable = true;
-          grub.enable = true;
+          grub = {
+            bootMode = "bios";
+            splashImage = ../teeny/darktrees.png;
+          };
           homeManager.enable = true;
         };
       }

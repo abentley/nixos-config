@@ -30,13 +30,8 @@ let
     {
       # Note this might jump back and forth as kernels are added or removed.
       boot.kernelPackages = latestKernelPackage;
-      # Bootloader.
-      boot.loader.grub = {
-        gfxmodeBios = "1920x1080x32";
-        splashImage = ./darktrees.png;
-      };
       boot.initrd.kernelModules = [ "i915" ];
-      boot.loader.grub.device = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S21HNXBG433208Y";
+      # Bootloader.
       boot.loader.grub.zfsSupport = true;
 
       # Don't actually want this for booting, but this seems to be how you get it
@@ -102,7 +97,12 @@ nixpkgs.lib.nixosSystem {
           enable = true;
           primaryUser = "abentley";
         };
-        grub.enable = true;
+        grub = {
+          bootMode = "bios";
+          resolution = "1920x1080x32";
+          splashImage = ./darktrees.png;
+          device = "/dev/disk/by-id/ata-Samsung_SSD_850_EVO_500GB_S21HNXBG433208Y";
+        };
         # podman.enable = true; # If it was intended to be enabled
         samba = {
           enable = true;

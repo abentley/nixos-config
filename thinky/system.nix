@@ -61,7 +61,6 @@ nixpkgs.lib.nixosSystem {
       # Enable features
       myFeatures = {
         grub = {
-          enable = true;
           bootMode = "efi";
           resolution = "1366x768x32";
           splashImage = "/home/abentley/treemoon2.png";

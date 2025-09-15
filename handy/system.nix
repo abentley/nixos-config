@@ -31,8 +31,7 @@ nixpkgs.lib.nixosSystem {
       myFeatures = {
         autoRotation.enable = true;
         grub = {
-          enable = true;
-          bootMode = "efi"; # Assuming EFI for handy
+          bootMode = "efi";
           resolution = "1280x720x32";
           splashImage = ../teeny/darktrees.png;
         };
