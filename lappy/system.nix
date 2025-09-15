@@ -70,7 +70,7 @@ nixpkgs.lib.nixosSystem {
 
         # Enable features
         myFeatures = {
-          flakeEnablement.enable = true;
+          flakeSupport.enable = true;
           grub = {
             bootMode = "bios";
             splashImage = ../teeny/darktrees.png;

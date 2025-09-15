@@ -30,7 +30,7 @@ nixpkgs.lib.nixosSystem {
           bootMode = "bios";
         };
         homeManager.enable = true;
-        flakeEnablement.enable = true;
+        flakeSupport.enable = true;
       };
     }
   ];

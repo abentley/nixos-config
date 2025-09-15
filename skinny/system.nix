@@ -33,7 +33,7 @@ nixpkgs.lib.nixosSystem {
           enable = true;
           primaryUser = "abentley";
         };
-        flakeEnablement.enable = true;
+        flakeSupport.enable = true;
         earlyConsole = {
           enable = true;
           consoleFontName = "terminus";

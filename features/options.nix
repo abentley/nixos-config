@@ -21,7 +21,7 @@
       };
     };
 
-    flakeEnablement = {
+    flakeSupport = {
       enable = lib.mkEnableOption "Enable Nix flakes.";
     };
 
@@ -149,7 +149,7 @@
     ))
 
     # Flake enablement feature
-    (lib.mkIf config.myFeatures.flakeEnablement.enable {
+    (lib.mkIf config.myFeatures.flakeSupport.enable {
       nix.settings.experimental-features = [
         "nix-command"
         "flakes"

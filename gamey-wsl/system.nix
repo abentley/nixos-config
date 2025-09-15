@@ -21,7 +21,7 @@ nixpkgs.lib.nixosSystem {
       wsl.enable = true;
       # Enable features
       myFeatures = {
-        flakeEnablement.enable = true;
+        flakeSupport.enable = true;
         homeManager.enable = true;
       };
     }
