@@ -49,7 +49,6 @@ nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
     ../base-configuration.nix
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../suites/base.nix
     ../suites/graphical-computer.nix
@@ -65,16 +64,16 @@ nixpkgs.lib.nixosSystem {
           resolution = "1366x768x32";
           splashImage = "/home/abentley/treemoon2.png";
         };
-        homeManager.enable = true;
         hyprland = {
           enable = true;
-          primaryUser = "abentley"; # Set primaryUser for hyprland
+          primaryUser = "abentley";
         };
+        flakeEnablement.enable = true;
         earlyConsole = {
           enable = true;
           consoleFontName = "spleen"; # Set consoleFontName for earlyConsole
         };
-        flakeEnablement.enable = true;
+        homeManager.enable = true;
       };
     }
   ];

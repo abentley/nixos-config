@@ -79,12 +79,12 @@ in
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
-    ./hardware-configuration.nix
-    ../suites/graphical-computer.nix
-    ../suites/base.nix
     ../base-configuration.nix
-    home-manager.nixosModules.home-manager
+    ./hardware-configuration.nix
+    ../suites/base.nix
+    ../suites/graphical-computer.nix
     ../features/options.nix # Add the new options file
+    home-manager.nixosModules.home-manager
     custom
     {
       # Enable features
@@ -124,6 +124,7 @@ nixpkgs.lib.nixosSystem {
           enable = true;
           primaryUser = "abentley";
         };
+        flakeEnablement.enable = true;
         earlyConsole = {
           enable = true;
           consoleFontName = "spleen";

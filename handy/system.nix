@@ -18,13 +18,11 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ../base-configuration.nix
     ./hardware-configuration.nix
-    ../base-configuration.nix
-    ./hardware-configuration.nix
     ../suites/base.nix
     ../suites/graphical-computer.nix
     ../suites/audio-production.nix
-    home-manager.nixosModules.home-manager
     ../features/options.nix # Add the new options file
+    home-manager.nixosModules.home-manager
     custom
     {
       # Enable features
@@ -35,6 +33,7 @@ nixpkgs.lib.nixosSystem {
           resolution = "1280x720x32";
           splashImage = ../teeny/darktrees.png;
         };
+        homeManager.enable = true;
         hyprland = {
           enable = true;
           primaryUser = "abentley";
@@ -45,7 +44,6 @@ nixpkgs.lib.nixosSystem {
           consoleFontName = "terminus";
         };
         steam.enable = true;
-        homeManager.enable = true;
       };
     }
   ];

@@ -19,12 +19,11 @@ nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
     ../base-configuration.nix
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
     ../suites/base.nix
     ../suites/graphical-computer.nix
-    home-manager.nixosModules.home-manager
     ../features/options.nix # Add the new options file
+    home-manager.nixosModules.home-manager
     custom
     {
       # Enable features
