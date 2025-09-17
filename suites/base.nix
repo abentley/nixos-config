@@ -20,6 +20,7 @@
     autoconf
     automake
     breezy
+    btop
     colordiff
     dive
     ffmpeg
@@ -33,6 +34,7 @@
     jsonnet
     libtool
     lsof
+    macchina
     mtr
     nethogs
     nixfmt-rfc-style
