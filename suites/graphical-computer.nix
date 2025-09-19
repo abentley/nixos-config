@@ -33,29 +33,29 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    beeper
+    discord
+    easyeffects
+    # Gnome Loupe has bad fullscreen support
+    eog
     google-chrome
-    # NVIM relies on $WAYLAND_DISPLAY to use wayland-specific tools.  So use an
-    # X11 tool instead.
-    xsel
     # I guess I'm a creature of habit.
     gnomeExtensions.dash-to-dock
     # edit images
     gimp-with-plugins
-    # Can be useful as an IDE
-    terminator
+    gparted
+    halloy
     # Wayland-compatible synergy!
     input-leap
-    beeper
-    halloy
-    discord
-    vesktop
-    warpinator
     rhythmbox
-    # Gnome Loupe has bad fullscreen support
-    eog
-    gparted
+    # Can be useful as an IDE
+    terminator
+    vesktop
     vlc
-    easyeffects
+    warpinator
+    # NVIM relies on $WAYLAND_DISPLAY to use wayland-specific tools.  So use an
+    # X11 tool instead.
+    xsel
   ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   # 42000, 42001: Warpinator.  Possibly unnecessary.

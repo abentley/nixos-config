@@ -161,7 +161,7 @@
       boot.loader.grub = {
         enable = true;
         useOSProber = true;
-        device = "nodev";
+        device = lib.mkDefault "nodev";
         efiSupport = true;
         splashImage = config.myFeatures.grub.splashImage;
         gfxmodeEfi = config.myFeatures.grub.resolution;
