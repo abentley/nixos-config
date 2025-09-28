@@ -17,15 +17,13 @@ nixpkgs.lib.nixosSystem {
     ../features/options.nix # Add the new options file
     {
       networking.hostName = "thinky-wsl";
-
       system.stateVersion = "24.11";
       # Enable features
       myFeatures = {
         flakeSupport.enable = true;
         homeManager.enable = true;
       };
-      # Define a user account. Don't forget to set a password with ‘passwd’.
-      users.users.${primaryUser} = {
+      users.users.abentley = {
         isNormalUser = true;
         description = "Aaron Bentley";
         extraGroups = [
@@ -33,7 +31,6 @@ nixpkgs.lib.nixosSystem {
           "wheel"
           "docker"
         ];
-
       };
     }
   ];

@@ -11,7 +11,7 @@
     pkgs.xdg-utils
   ];
   wsl.enable = true;
-  wsl.defaultUser = "abentley";
+  wsl.defaultUser = primaryUser;
   wsl.tarball.configPath = ../.;
   systemd.tmpfiles.settings = {
     # 1. Define a config file group name (e.g., "wsl-symlinks")

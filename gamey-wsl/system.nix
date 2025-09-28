@@ -9,20 +9,28 @@
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
-    ./configuration.nix
     ../suites/base.nix
     ../suites/graphical.nix
-    ./configuration.nix
+    ../suites/wsl.nix
     home-manager.nixosModules.home-manager
     nixos-wsl.nixosModules.default
     ../features/options.nix # Add the new options file
     {
+      networking.hostName = "gamey-wsl";
       system.stateVersion = "24.11";
-      wsl.enable = true;
       # Enable features
       myFeatures = {
         flakeSupport.enable = true;
         homeManager.enable = true;
+      };
+      users.users.abentley = {
+        isNormalUser = true;
+        description = "Aaron Bentley";
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+          "docker"
+        ];
       };
     }
   ];
