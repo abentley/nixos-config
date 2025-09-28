@@ -19,10 +19,6 @@
     enable = true;
     defaultUser = primaryUser;
     tarball.configPath = ../.;
-    nativeGuiApps = {
-      enable = true;
-      opengl.enable = true;
-    };
     startMenuLaunchers = true;
   };
 }
