@@ -15,6 +15,7 @@ let
           # grub.efiInstallAsRemovable = true;
           # grub.font = "${pkgs.hack-font}/share/fonts/hack/Hack-Regular.ttf";
           # grub.fontSize = 24;
+          grub.default = "saved";
 
           efi.canTouchEfiVariables = true;
         };
