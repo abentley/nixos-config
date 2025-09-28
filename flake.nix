@@ -50,6 +50,7 @@
 
       nixosConfigurations.lappy = import ./lappy/system.nix inputs;
       nixosConfigurations.thinky = import ./thinky/system.nix inputs;
+      nixosConfigurations.thinky-wsl = import ./thinky-wsl/system.nix inputs;
       nixosConfigurations.teeny = import ./teeny/system.nix inputs;
       nixosConfigurations.gamey-wsl = import ./gamey-wsl/system.nix inputs;
       nixosConfigurations.hp = import ./hp/system.nix inputs;

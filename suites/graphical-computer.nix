@@ -48,8 +48,6 @@
     # Wayland-compatible synergy!
     input-leap
     rhythmbox
-    # Can be useful as an IDE
-    terminator
     vesktop
     vlc
     warpinator

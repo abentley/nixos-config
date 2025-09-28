@@ -18,6 +18,8 @@
     halloy
     meld
     mtr-gui
+    # Can be useful as an IDE
+    terminator
   ];
   fonts.packages = with pkgs; [
     font-awesome
