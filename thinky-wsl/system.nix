@@ -9,7 +9,6 @@
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
-    ./configuration.nix
     ../suites/base.nix
     ../suites/graphical.nix
     ../suites/wsl.nix
@@ -17,11 +16,24 @@ nixpkgs.lib.nixosSystem {
     nixos-wsl.nixosModules.default
     ../features/options.nix # Add the new options file
     {
+      networking.hostName = "thinky-wsl";
+
       system.stateVersion = "24.11";
       # Enable features
       myFeatures = {
         flakeSupport.enable = true;
         homeManager.enable = true;
+      };
+      # Define a user account. Don't forget to set a password with ‘passwd’.
+      users.users.${primaryUser} = {
+        isNormalUser = true;
+        description = "Aaron Bentley";
+        extraGroups = [
+          "networkmanager"
+          "wheel"
+          "docker"
+        ];
+
       };
     }
   ];
