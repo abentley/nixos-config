@@ -47,6 +47,7 @@
     halloy
     # Wayland-compatible synergy!
     input-leap
+    pwvucontrol
     rhythmbox
     vesktop
     vlc
