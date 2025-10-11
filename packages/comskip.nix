@@ -7,12 +7,12 @@ let
 in
 pkgs.stdenv.mkDerivation rec {
   pname = "comskip";
-  version = "0.82.011";
+  version = "0.83";
 
   src = pkgs.fetchFromGitHub {
     owner = "erikkaashoek";
     repo = "Comskip";
-    rev = "2ef86841cd84df66fe0e674f300ee49cef6e097a";
+    rev = "55b0bcd018ddb9dacfad79addc48df55c1411073";
     sha256 = "sha256-4ef/YZpaiSp3VeSiU6mRR38GjkrzxboI0/VXQ5QQiUM=";
   };
 
