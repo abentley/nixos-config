@@ -32,6 +32,7 @@
     htop
     just
     jsonnet
+    keychain
     libtool
     lsof
     macchina
