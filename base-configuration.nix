@@ -5,6 +5,9 @@
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
+let
+  MiB = 1024 * 1024;
+in
 
 {
   imports = [
@@ -18,6 +21,8 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+
+  nix.settings.download-buffer-size = 500 * MiB;
 
   # Set your time zone.
   time.timeZone = "America/Toronto";
