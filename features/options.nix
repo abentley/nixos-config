@@ -3,6 +3,7 @@
   config,
   pkgs,
   lib,
+  old-nixpkgs,
   ...
 }:
 
@@ -79,8 +80,6 @@
         type = lib.types.str;
         description = "The primary user for Jellyfin configuration.";
       };
-      # Assuming old-nixpkgs is handled by the main system configuration or can be derived.
-      # For simplicity, not making it an explicit option here unless needed.
     };
 
     podman = {
@@ -223,10 +222,8 @@
     (lib.mkIf config.myFeatures.jellyfin.enable (
       let
         primaryUser = config.myFeatures.jellyfin.primaryUser;
-        # Assuming old-nixpkgs is available in the scope where this is imported
-        # or can be derived from pkgs.
-        # For now, using pkgs directly for comskip.
-        comskip = (pkgs.callPackage ../packages/comskip.nix { pkgs = pkgs; });
+        old-pkgs = import old-nixpkgs { system = "x86_64-linux"; };
+        comskip = (pkgs.callPackage ../packages/comskip.nix { pkgs = old-pkgs; });
       in
       {
         services.jellyfin.enable = true;
