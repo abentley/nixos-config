@@ -30,6 +30,7 @@
     gemini-cli
     graphviz
     htop
+    iperf3
     just
     jsonnet
     keychain
