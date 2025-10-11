@@ -64,6 +64,10 @@ let
 
       # This is more of a graphical-server config, but I only have one of those.
       services.xserver.displayManager.gdm.autoSuspend = false;
+      services.iperf3 = {
+        enable = true;
+        openFirewall = true;
+      };
       environment.systemPackages = [
         pkgs.mplayer
       ];
