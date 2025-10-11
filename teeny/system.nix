@@ -82,6 +82,9 @@ let
   );
 in
 nixpkgs.lib.nixosSystem {
+  specialArgs = {
+    old-nixpkgs = old-nixpkgs;
+  };
   system = "x86_64-linux";
   modules = [
     ./hardware-configuration.nix
