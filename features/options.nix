@@ -82,6 +82,14 @@
       };
     };
 
+    docker = {
+      enable = lib.mkEnableOption "Enable Docker.";
+      primaryUser = lib.mkOption {
+        type = lib.types.str;
+        description = "The primary user to add to the docker group.";
+      };
+    };
+
     podman = {
       enable = lib.mkEnableOption "Enable Podman.";
     };
@@ -236,6 +244,17 @@
         ];
         users.users.${primaryUser}.extraGroups = [ "jellyfin" ];
         networking.firewall.extraInputRules = "udp sport 65001 accept";
+      }
+    ))
+
+    # Docker feature
+    (lib.mkIf config.myFeatures.docker.enable (
+      let
+        primaryUser = config.myFeatures.docker.primaryUser;
+      in
+      {
+        virtualisation.docker.enable = true;
+        users.users.${primaryUser}.extraGroups = [ "docker" ];
       }
     ))
 

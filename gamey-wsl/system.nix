@@ -22,15 +22,10 @@ nixpkgs.lib.nixosSystem {
       myFeatures = {
         flakeSupport.enable = true;
         homeManager.enable = true;
-      };
-      users.users.abentley = {
-        isNormalUser = true;
-        description = "Aaron Bentley";
-        extraGroups = [
-          "networkmanager"
-          "wheel"
-          "docker"
-        ];
+        docker = {
+          enable = true;
+          primaryUser = "abentley";
+        };
       };
     }
   ];

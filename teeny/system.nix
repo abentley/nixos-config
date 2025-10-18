@@ -72,9 +72,7 @@ let
         pkgs.mplayer
       ];
 
-      virtualisation.docker.enable = true;
       users.users = {
-        abentley.extraGroups = [ "docker" ];
         jellyfin.extraGroups = [ "docker" ];
       };
     }
@@ -97,6 +95,10 @@ nixpkgs.lib.nixosSystem {
       # Enable features
       myFeatures = {
         jellyfin = {
+          enable = true;
+          primaryUser = "abentley";
+        };
+        docker = {
           enable = true;
           primaryUser = "abentley";
         };
