@@ -12,10 +12,7 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ../base-configuration.nix
     ../suites/base.nix
-    ../suites/graphical-computer.nix
-    ../base-configuration.nix
-    ../suites/base.nix
-    ../suites/graphical-computer.nix
+    ../suites/laptop.nix
     ./hardware-configuration.nix
     home-manager.nixosModules.home-manager
     ../features/options.nix # Add the new options file

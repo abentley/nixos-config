@@ -19,7 +19,7 @@ nixpkgs.lib.nixosSystem {
     ../base-configuration.nix
     ./hardware-configuration.nix
     ../suites/base.nix
-    ../suites/graphical-computer.nix
+    ../suites/laptop.nix
     ../suites/audio-production.nix
     ../features/options.nix # Add the new options file
     home-manager.nixosModules.home-manager
