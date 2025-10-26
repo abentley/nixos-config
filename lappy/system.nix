@@ -70,7 +70,10 @@ nixpkgs.lib.nixosSystem {
           flakeSupport.enable = true;
           grub = {
             bootMode = "bios";
-            splashImage = ../teeny/darktrees.png;
+            splashImage = pkgs.fetchurl {
+              url = "https://assets.aaronbentley.com/treemoon-3.png";
+              sha256 = "4d7b02f8e950f8bf5e9b45cf993d8307ad3778980d131e1d8d4cf09aa9fdfd16";
+            };
           };
           homeManager.enable = true;
         };

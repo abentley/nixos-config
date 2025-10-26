@@ -57,28 +57,31 @@ nixpkgs.lib.nixosSystem {
     ../features/options.nix # Add the new options file
     home-manager.nixosModules.home-manager
     custom
-    ({ pkgs, ... }: {
-      # Enable features
-      myFeatures = {
-        grub = {
-          bootMode = "efi";
-          resolution = "1366x768x32";
-          splashImage = pkgs.fetchurl {
-            url = "https://assets.aaronbentley.com/treemoon-3.png";
-            sha256 = "4d7b02f8e950f8bf5e9b45cf993d8307ad3778980d131e1d8d4cf09aa9fdfd16";
+    (
+      { pkgs, ... }:
+      {
+        # Enable features
+        myFeatures = {
+          grub = {
+            bootMode = "efi";
+            resolution = "1366x768x32";
+            splashImage = pkgs.fetchurl {
+              url = "https://assets.aaronbentley.com/treemoon-3.png";
+              sha256 = "4d7b02f8e950f8bf5e9b45cf993d8307ad3778980d131e1d8d4cf09aa9fdfd16";
+            };
           };
+          hyprland = {
+            enable = true;
+            primaryUser = "abentley";
+          };
+          flakeSupport.enable = true;
+          earlyConsole = {
+            enable = true;
+            consoleFontName = "spleen"; # Set consoleFontName for earlyConsole
+          };
+          homeManager.enable = true;
         };
-        hyprland = {
-          enable = true;
-          primaryUser = "abentley";
-        };
-        flakeSupport.enable = true;
-        earlyConsole = {
-          enable = true;
-          consoleFontName = "spleen"; # Set consoleFontName for earlyConsole
-        };
-        homeManager.enable = true;
-      };
-    })
+      }
+    )
   ];
 }
