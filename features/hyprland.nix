@@ -62,7 +62,7 @@ in
   home-manager.users.abentley = {
     home.file.".config/hypr/extra.conf".text = ''
       exec-once = swww-daemon
-      exec-once = swww img ''${wallpaper}
+      exec-once = swww img ${wallpaper}
     '';
     home.file.".config/hypr/shared.conf".source = ../config/hypr/shared.conf;
     home.file.".config/hypr/nix.conf".source = ../config/hypr/nix.conf;
