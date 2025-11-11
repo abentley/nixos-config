@@ -3,8 +3,8 @@
 { pkgs, primaryUser, ... }:
 let
   wallpaper = pkgs.fetchurl {
-    url = "https://assets.aaronbentley.com/treemoon-3.png";
-    sha256 = "05pxznlrmw2cilfiw4qdk1w3gb87hcyrkks5kdgbzy2hx7w04ysd";
+    url = "https://assets.aaronbentley.com/PA024118.ORF.jpg";
+    sha256 = "sha256-WHjK9rAB/aSmIjtowx+eiETqYbOISveTjReZgzfP6iA=";
   };
 in
 {
