@@ -65,6 +65,10 @@
   };
   environment.homeBinInPath = true;
 
+  # Provide an alternative to gnome-keychain if not running.
+  programs.ssh.extraConfig = "AddKeysToAgent yes";
+  programs.bash.interactiveShellInit = ''eval "$(keychain --eval --quiet)"'';
+
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
   services.openssh.openFirewall = true;
