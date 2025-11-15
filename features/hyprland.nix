@@ -1,6 +1,12 @@
 # Provide the Hyprland compositor as a feature, including all the functionality
 # that must be re-implemented to provide similar facilities to GNOME
 { pkgs, primaryUser, ... }:
+let
+  wallpaper = pkgs.fetchurl {
+    url = "https://assets.aaronbentley.com/PA024118.ORF.jpg";
+    sha256 = "sha256-WHjK9rAB/aSmIjtowx+eiETqYbOISveTjReZgzfP6iA=";
+  };
+in
 {
   programs.hyprland.enable = true;
   environment.systemPackages = [
@@ -54,6 +60,10 @@
     lidSwitchExternalPower = "suspend";
   };
   home-manager.users.abentley = {
+    home.file.".config/hypr/extra.conf".text = ''
+      exec-once = swww-daemon
+      exec-once = swww img ${wallpaper}
+    '';
     home.file.".config/hypr/shared.conf".source = ../config/hypr/shared.conf;
     home.file.".config/hypr/nix.conf".source = ../config/hypr/nix.conf;
     home.file.".config/hypr/autorotate.conf".source = ../config/hypr/autorotate.conf;
