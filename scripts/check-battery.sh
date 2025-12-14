@@ -2,21 +2,40 @@
 #
 # Sends a notification when the battery is low.
 #
+set -x
 
 STATE_FILE="/tmp/battery-notification-state"
-: ${WARNING_LEVEL=10}
-: ${CRITICAL_LEVEL=5}
+: ${WARNING_THRESHOLD=10}
+: ${CRITICAL_THRESHOLD=5}
 
-# Send a notification with a specified urgency.
-# Usage: notify <urgency> <level> <message> <icon>
+# Send a notification with a specified urgency if conditions are met.
+# Usage: notify <urgency> <charge> <last_notified_level>
 notify() {
   urgency=$1
-  level=$2
-  message=$3
-  icon=$4
-  echo "Sending notification: $message"
-  notify-send --urgency="$urgency" --icon="$icon" "Battery" "$message"
-  echo "$level" > "$STATE_FILE"
+  charge=$2
+  last_notified_level=$3
+
+  if [ "$urgency" = "critical" ]; then
+    threshold=$CRITICAL_THRESHOLD
+    message="Battery level is critically low at $charge%!"
+    icon="battery-empty"
+  elif [ "$urgency" = "normal" ]; then
+    threshold=$WARNING_THRESHOLD
+    message="Battery level is low at $charge%."
+    icon="battery-low"
+  else
+    # Should not happen
+    return 1
+  fi
+
+  if [ "$charge" -le "$threshold" ] && [ "$last_notified_level" -gt "$threshold" ]; then
+    echo "Sending notification: $message"
+    notify-send --urgency="$urgency" --icon="$icon" "Battery" "$message"
+    echo "$threshold" > "$STATE_FILE"
+    return 0
+  fi
+
+  return 1
 }
 
 main() {
@@ -30,14 +49,12 @@ main() {
       continue
     fi
 
-    capacity=$(cat "$battery/capacity")
+    charge=$(cat "$battery/capacity")
     status=$(cat "$battery/status")
 
     if [ "$status" = "Discharging" ]; then
-      if [ "$capacity" -le $CRITICAL_LEVEL ] && [ "$last_notified_level" -gt $CRITICAL_LEVEL ]; then
-        notify "critical" $CRITICAL_LEVEL "Battery level is critically low at $capacity%!" "battery-empty"
-      elif [ "$capacity" -le $WARNING_LEVEL ] && [ "$last_notified_level" -gt $WARNING_LEVEL ]; then
-        notify "normal" $WARNING_LEVEL "Battery level is low at $capacity%." "battery-low"
+      if ! notify "critical" "$charge" "$last_notified_level"; then
+        notify "normal" "$charge" "$last_notified_level"
       fi
     elif [ "$status" = "Charging" ] || [ "$status" = "Full" ]; then
       # Reset state if charging or full
