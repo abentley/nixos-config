@@ -26,7 +26,7 @@ in
     # Dock
     pkgs.nwg-dock-hyprland
     # Suggested notification agent.
-    pkgs.mako
+    pkgs.swaynotificationcenter
     pkgs.pavucontrol
     # Needed for volume in hyprland
     pkgs.pulseaudio
@@ -63,7 +63,19 @@ in
     home.file.".config/hypr/extra.conf".text = ''
       exec-once = swww-daemon
       exec-once = swww img ${wallpaper} --outputs all
-      exec-once = mako
+      exec-once = swaync
+    '';
+    home.file.".config/swaync/config.json".text = ''
+      {
+        "timeout-critical": 0
+      }
+    '';
+    home.file.".config/swaync/style.css".text = ''
+      .notification.critical {
+          background-color: #ff0000;
+          color: #ffffff;
+          border: 2px solid #cc0000;
+      }
     '';
     home.file.".config/hypr/shared.conf".source = ../config/hypr/shared.conf;
     home.file.".config/hypr/nix.conf".source = ../config/hypr/nix.conf;
