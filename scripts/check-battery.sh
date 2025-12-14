@@ -4,6 +4,8 @@
 #
 
 STATE_FILE="/tmp/battery-notification-state"
+: ${WARNING_LEVEL=10}
+: ${CRITICAL_LEVEL=5}
 
 # Send a notification with a specified urgency.
 # Usage: notify <urgency> <level> <message>
@@ -17,7 +19,7 @@ notify() {
 }
 
 main() {
-  last_notified_level=0
+  last_notified_level=101
   if [ -f "$STATE_FILE" ]; then
     last_notified_level=$(cat "$STATE_FILE")
   fi
@@ -31,10 +33,10 @@ main() {
     status=$(cat "$battery/status")
 
     if [ "$status" = "Discharging" ]; then
-      if [ "$capacity" -le 5 ] && [ "$last_notified_level" -gt 5 ]; then
-        notify "critical" 5 "Battery level is critically low at $capacity%!"
-      elif [ "$capacity" -le 10 ] && [ "$last_notified_level" -gt 10 ]; then
-        notify "normal" 10 "Battery level is low at $capacity%."
+      if [ "$capacity" -le $CRITICAL_LEVEL ] && [ "$last_notified_level" -gt $CRITICAL_LEVEL ]; then
+        notify "critical" $CRITICAL_LEVEL "Battery level is critically low at $capacity%!"
+      elif [ "$capacity" -le $WARNING_LEVEL ] && [ "$last_notified_level" -gt $WARNING_LEVEL ]; then
+        notify "normal" $WARNING_LEVEL "Battery level is low at $capacity%."
       fi
     elif [ "$status" = "Charging" ] || [ "$status" = "Full" ]; then
       # Reset state if charging or full

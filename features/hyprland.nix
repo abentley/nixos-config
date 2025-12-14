@@ -26,7 +26,7 @@ in
     # Dock
     pkgs.nwg-dock-hyprland
     # Suggested notification agent.
-    # pkgs.mako
+    pkgs.mako
     pkgs.pavucontrol
     # Needed for volume in hyprland
     pkgs.pulseaudio
@@ -63,6 +63,7 @@ in
     home.file.".config/hypr/extra.conf".text = ''
       exec-once = swww-daemon
       exec-once = swww img ${wallpaper} --outputs all
+      exec-once = mako
     '';
     home.file.".config/hypr/shared.conf".source = ../config/hypr/shared.conf;
     home.file.".config/hypr/nix.conf".source = ../config/hypr/nix.conf;
