@@ -14,38 +14,15 @@ let
       lib,
       ...
     }:
-    let
-      zfsCompatibleKernelPackages = lib.filterAttrs (
-        name: kernelPackages:
-        (builtins.match "linux_[0-9]+_[0-9]+" name) != null
-        && (builtins.tryEval kernelPackages).success
-        && (!kernelPackages.${config.boot.zfs.package.kernelModuleAttribute}.meta.broken)
-      ) pkgs.linuxKernel.packages;
-      latestKernelPackage = lib.last (
-        lib.sort (a: b: (lib.versionOlder a.kernel.version b.kernel.version)) (
-          builtins.attrValues zfsCompatibleKernelPackages
-        )
-      );
-    in
     {
-      # Note this might jump back and forth as kernels are added or removed.
-      boot.kernelPackages = latestKernelPackage;
       boot.initrd.kernelModules = [ "i915" ];
       # Bootloader.
-      boot.loader.grub.zfsSupport = true;
 
       # Don't actually want this for booting, but this seems to be how you get it
       # at all.
       boot.supportedFilesystems = [
         "bcachefs"
-        "zfs"
       ];
-      # boot.zfs.enabled = true;
-      boot.zfs.devNodes = "/dev/disk/by-partuuid/ed4867b2-c1f2-7249-9a71-a904b9d8d9f8";
-
-      boot.zfs.extraPools = [ "raidpool2" ];
-
-      services.zfs.autoScrub.enable = true;
 
       fileSystems."/mnt/bcachefs" = {
         device = "/dev/disk/by-uuid/33ac4789-8fdc-4774-ab7a-1f4384ca0aeb";
@@ -59,8 +36,6 @@ let
         options = [ "noauto" ];
       };
       networking.hostName = "teeny"; # Define your hostname.
-      # Required for zfs
-      networking.hostId = "21d28d23";
 
       # This is more of a graphical-server config, but I only have one of those.
       services.xserver.displayManager.gdm.autoSuspend = false;
@@ -91,6 +66,11 @@ nixpkgs.lib.nixosSystem {
     ../features/options.nix # Add the new options file
     home-manager.nixosModules.home-manager
     custom
+    (import ../features/zfs-support.nix {
+      raidpool = "raidpool2";
+      devNode = "/dev/disk/by-partuuid/ed4867b2-c1f2-7249-9a71-a904b9d8d9f8";
+      hostId = "21d28d23";
+    })
     {
       # Enable features
       myFeatures = {
