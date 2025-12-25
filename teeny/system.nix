@@ -47,6 +47,42 @@ let
         pkgs.mplayer
       ];
 
+      # Enable 5.1 surround sound via passthrough
+      services.pipewire = {
+        enable = true;
+        alsa.enable = true;
+        pulse.enable = true;
+        jack.enable = true;
+        # This is for applications that output multichannel LPCM.
+        # PipeWire will attempt to encode it to a compressed format if the
+        # sink supports it (which we enable below).
+        config.pipewire."context.properties" = {
+          "default.audio.channels" = 6;
+          "default.audio.position" = "[ FL FR FC LFE SL SR ]";
+        };
+
+        # This enables passthrough for compressed audio formats like Dolby Digital (AC3)
+        # and DTS. It creates a config file for WirePlumber (the PipeWire session manager)
+        # that applies these settings to your HDMI output.
+        wireplumber.configPackages = [
+          (pkgs.writeTextDir "share/wireplumber/main.lua.d/51-hdmi-passthrough.lua" ''
+            rule = {
+              matches = {
+                {
+                  -- Matches all HDMI audio outputs
+                  { "node.name", "matches", "alsa_output.pci-*-hdmi-*" },
+                },
+              },
+              apply_properties = {
+                -- Enables PCM, AC3 (Dolby), E-AC3 (Dolby Digital Plus), and DTS
+                ["iec958.codecs"] = { "pcm", "ac3", "eac3", "dts" },
+              },
+            }
+            table.insert(alsa_monitor.rules, rule)
+          '')
+        ];
+      };
+
       users.users = {
         jellyfin.extraGroups = [ "docker" ];
       };
