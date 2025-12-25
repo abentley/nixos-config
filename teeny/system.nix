@@ -56,9 +56,12 @@ let
         # This is for applications that output multichannel LPCM.
         # PipeWire will attempt to encode it to a compressed format if the
         # sink supports it (which we enable below).
-        config.pipewire."context.properties" = {
-          "default.audio.channels" = 6;
-          "default.audio.position" = "[ FL FR FC LFE SL SR ]";
+        # This creates a drop-in config file as recommended by NixOS.
+        extraConfig.pipewire."99-lpc-surround.conf" = {
+          "context.properties" = {
+            "default.audio.channels" = 6;
+            "default.audio.position" = "[ FL FR FC LFE SL SR ]";
+          };
         };
 
         # This enables passthrough for compressed audio formats like Dolby Digital (AC3)
