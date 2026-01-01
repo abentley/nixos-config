@@ -8,9 +8,9 @@ set -e
 ALL_HOSTS="hp handy gamey-wsl thinky thinky-wsl teeny skinny lappy"
 
 usage() {
-    echo "Usage: $0 [--update] [<hostname>]"
+    echo "Usage: $0 [--update] [<hostname>...]"
     echo "  (no hostname): (Default) Compares all known hosts against their baselines."
-    echo "  <hostname>:    Compares a specific host against its baseline."
+    echo "  <hostname>...: Compares one or more specific hosts against their baselines."
     echo "  --update:      Saves the build output as the new baseline instead of comparing."
     echo
     echo "Known hostnames: $ALL_HOSTS"
@@ -19,7 +19,7 @@ usage() {
 
 # --- Argument Parsing ---
 CMD="compare"
-TARGET_HOST="" # Optional hostname from args
+TARGET_HOSTS="" # Space-separated list of hosts from args
 
 while [ "$#" -gt 0 ]; do
     case "$1" in
@@ -31,25 +31,27 @@ while [ "$#" -gt 0 ]; do
             usage
             ;;
         *)
-            if [ -n "$TARGET_HOST" ]; then
-                echo "Error: Multiple hostnames provided." >&2
-                usage
-            fi
-            TARGET_HOST="$1"
+            # Append any other argument to the list of target hosts
+            TARGET_HOSTS="$TARGET_HOSTS $1"
             shift
             ;;
     esac
 done
 
+# Trim leading/trailing whitespace
+TARGET_HOSTS=$(echo "$TARGET_HOSTS" | awk '{$1=$1};1')
+
 # --- Determine Hosts to Process ---
 HOSTS_TO_PROCESS=""
-if [ -n "$TARGET_HOST" ]; then
-    # Check if the provided host is in the known list
-    if ! echo " $ALL_HOSTS " | grep -q " $TARGET_HOST "; then
-        echo "Error: Unknown hostname '$TARGET_HOST'." >&2
-        usage
-    fi
-    HOSTS_TO_PROCESS="$TARGET_HOST"
+if [ -n "$TARGET_HOSTS" ]; then
+    # Validate each provided host
+    for HOST in $TARGET_HOSTS; do
+        if ! echo " $ALL_HOSTS " | grep -q " $HOST "; then
+            echo "Error: Unknown hostname '$HOST'." >&2
+            usage
+        fi
+    done
+    HOSTS_TO_PROCESS="$TARGET_HOSTS"
 else
     HOSTS_TO_PROCESS="$ALL_HOSTS"
 fi
@@ -103,7 +105,7 @@ for HOST in $HOSTS_TO_PROCESS; do
                     echo "Warning: 'nix-diff' not found. Please install it to see the differences." >&2
                     echo "You can typically install it with: nix-env -iA nixpkgs.nix-diff" >&2
                 else
-                    nix-diff "$BASELINE_PATH" "$CURRENT_PATH"
+                    nix-diff --color=always "$BASELINE_PATH" "$CURRENT_PATH" | less -R
                 fi
             fi
             ;;

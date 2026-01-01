@@ -56,6 +56,7 @@
     stdenv
     tree
     usbutils
+    uv
     wget
     whois
   ];
