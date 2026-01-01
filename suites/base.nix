@@ -41,6 +41,7 @@
     nethogs
     nixfmt-rfc-style
     nixfmt-tree
+    nix-diff
     nix-search
     nmap
     opentofu
