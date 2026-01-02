@@ -43,6 +43,7 @@ nixpkgs.lib.nixosSystem {
         # This is a portable system, so we don't want a hardware-configuration.nix
         # Instead, we'll enable some generic features.
         powerManagement.enable = true;
+        hardware.enableRedistributableFirmware = true;
 
         # Add common USB storage drivers to the initrd to ensure the SSD is found at boot.
         boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "uas" "usb_storage" "sd_mod" ];
