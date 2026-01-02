@@ -56,5 +56,6 @@
       nixosConfigurations.hp = import ./hp/system.nix inputs;
       nixosConfigurations.skinny = import ./skinny/system.nix inputs;
       nixosConfigurations.handy = import ./handy/system.nix inputs;
+      nixosConfigurations.portable = import ./portable/system.nix inputs;
     };
 }
