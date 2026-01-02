@@ -38,6 +38,7 @@
     lsof
     macchina
     mtr
+    ncdu
     nethogs
     nixfmt-rfc-style
     nixfmt-tree
@@ -46,7 +47,9 @@
     nmap
     opentofu
     pciutils
+    pigz
     pkg-config
+    pv
     python3
     python3Packages.autopep8
     python3Packages.flake8
