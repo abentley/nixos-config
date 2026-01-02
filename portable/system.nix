@@ -15,13 +15,19 @@ nixpkgs.lib.nixosSystem {
     home-manager.nixosModules.home-manager
 
     (
-      { ... }:
+      { pkgs, ... }:
       {
+        # Allow installation of non-free packages, like the firmware needed for this wifi card.
+        nixpkgs.config.allowUnfree = true;
+
         # This MUST be set to a unique value for each system.
         networking.hostName = "portable";
 
         # Enable our custom features
         myFeatures.homeManager.enable = true;
+
+        # Add non-free firmware for hardware like Qualcomm Wi-Fi.
+        hardware.firmware = [ pkgs.firmwareLinuxNonfree ];
 
         # Bootloader.
         boot.loader.systemd-boot.enable = true;
