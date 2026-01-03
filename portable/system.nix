@@ -89,11 +89,27 @@ nixpkgs.lib.nixosSystem {
             # Temporarily connect the device to format it, if needed.
             qemu-nbd --disconnect "$NBD_DEV" || true
             qemu-nbd --connect="$NBD_DEV" "$QCOW_FILE"
-            sleep 1 # Give the device a moment to settle.
-            if ! blkid -p -o value -s TYPE "$NBD_DEV"; then
-                echo "Formatting $NBD_DEV with ext4..."
-                mkfs.ext4 "$NBD_DEV"
+
+            # Poll for a few seconds to see if the device already has a filesystem.
+            # This is more robust than a fixed sleep.
+            FORMATTED=false
+            for i in $(seq 1 5); do
+              if blkid -p -o value -s TYPE "$NBD_DEV" >/dev/null 2>&1; then
+                FORMATTED=true
+                echo "NBD device already formatted."
+                break
+              fi
+              echo "Waiting for NBD device to settle... attempt $i"
+              sleep 1
+            done
+
+            # If no filesystem was found after polling, format it.
+            if [ "$FORMATTED" = "false" ]; then
+              echo "No filesystem found. Formatting $NBD_DEV with ext4..."
+              # Use -F to force formatting on a file-based device if needed.
+              mkfs.ext4 -F "$NBD_DEV"
             fi
+
             qemu-nbd --disconnect "$NBD_DEV"
           '';
         };
