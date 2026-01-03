@@ -123,7 +123,7 @@ nixpkgs.lib.nixosSystem {
           after = [ "setup-qcow2.service" ];
           serviceConfig = {
             Type = "simple";
-            ExecStart = "${pkgs."qemu-utils"}/bin/qemu-nbd --connect=/dev/nbd0 /transfer/nixos_storage.qcow2 --fork=no";
+            ExecStart = "${pkgs."qemu-utils"}/bin/qemu-nbd --connect=/dev/nbd0 /transfer/nixos_storage.qcow2 --persistent";
             ExecStop = "${pkgs."qemu-utils"}/bin/qemu-nbd --disconnect /dev/nbd0";
             Restart = "on-failure";
           };
