@@ -59,60 +59,26 @@ nixpkgs.lib.nixosSystem {
           what = "/dev/nbd0";
           type = "ext4";
           options = "defaults,nofail";
-          requires = [ "nbd-for-data.service" ];
-          after = [ "nbd-for-data.service" ];
+          requires = [ "format-data.service" ];
+          after = [ "format-data.service" ];
           wantedBy = [ "multi-user.target" ];
         }];
 
-        # 2. A one-shot service to create and format the qcow2 file on the first boot.
+        # 2. A one-shot service to create the qcow2 file on the first boot.
         systemd.services.setup-qcow2 = {
-          description = "Create and format QCOW2 storage file";
+          description = "Create QCOW2 storage file";
           wantedBy = [ "multi-user.target" ];
           after = [ "transfer.mount" ];
           before = [ "nbd-for-data.service" ];
           serviceConfig.Type = "oneshot";
-          path = [ pkgs."qemu-utils" pkgs.e2fsprogs pkgs.util-linux pkgs.kmod ];
+          path = [ pkgs."qemu-utils" ];
           script = ''
-            set -ex # Exit on error AND print all commands
+            set -ex
             QCOW_FILE="/transfer/nixos_storage.qcow2"
-            NBD_DEV="/dev/nbd0"
-
-            echo "--- Starting setup-qcow2 script ---"
-            modprobe nbd max_part=8
-
             if [ ! -f "$QCOW_FILE" ]; then
               echo "Creating 500GB qcow2 image at $QCOW_FILE..."
               qemu-img create -f qcow2 "$QCOW_FILE" 500G
             fi
-
-            echo "Connecting NBD device..."
-            qemu-nbd --disconnect "$NBD_DEV" || true
-            qemu-nbd --connect="$NBD_DEV" "$QCOW_FILE"
-
-            FORMATTED=false
-            for i in $(seq 1 5); do
-              echo "Polling for filesystem, attempt $i..."
-              # Run blkid and check exit code explicitly
-              if blkid -p -o value -s TYPE "$NBD_DEV"; then
-                echo "blkid succeeded. Filesystem found."
-                FORMATTED=true
-                break
-              else
-                echo "blkid failed with exit code $?. Waiting..."
-                sleep 1
-              fi
-            done
-
-            if [ "$FORMATTED" = "false" ]; then
-              echo "No filesystem found after polling. Formatting $NBD_DEV with ext4..."
-              mkfs.ext4 -F "$NBD_DEV"
-            else
-              echo "Skipping format as filesystem already exists."
-            fi
-
-            echo "Disconnecting NBD device..."
-            qemu-nbd --disconnect "$NBD_DEV"
-            echo "--- Finished setup-qcow2 script ---"
           '';
         };
 
@@ -121,12 +87,37 @@ nixpkgs.lib.nixosSystem {
           description = "Connect QCOW2 file to NBD device";
           wantedBy = [ "multi-user.target" ];
           after = [ "setup-qcow2.service" ];
+          path = [ pkgs.kmod ];
+          preStart = "modprobe nbd max_part=8";
           serviceConfig = {
             Type = "simple";
             ExecStart = "${pkgs."qemu-utils"}/bin/qemu-nbd --connect=/dev/nbd0 /transfer/nixos_storage.qcow2 --persistent";
             ExecStop = "${pkgs."qemu-utils"}/bin/qemu-nbd --disconnect /dev/nbd0";
             Restart = "on-failure";
           };
+        };
+
+        # NEW: A one-shot service to format the qcow2 device, if needed.
+        systemd.services.format-data = {
+          description = "Format QCOW2 storage file if needed";
+          after = [ "nbd-for-data.service" ];
+          before = [ "data.mount" ];
+          requires = [ "nbd-for-data.service" ];
+          serviceConfig.Type = "oneshot";
+          path = [ pkgs.e2fsprogs pkgs.util-linux ];
+          script = ''
+            set -ex
+            NBD_DEV="/dev/nbd0"
+            # Give the device a moment to settle after being connected.
+            sleep 1
+            # Use 'blkid' to check for a filesystem. If it fails (exit code != 0), format.
+            if ! blkid -p -o value -s TYPE "$NBD_DEV" >/dev/null 2>&1; then
+              echo "No filesystem found on $NBD_DEV. Formatting with ext4..."
+              mkfs.ext4 -F "$NBD_DEV"
+            else
+              echo "Filesystem already exists on $NBD_DEV. Skipping format."
+            fi
+          '';
         };
 
         # This is a portable system, so we don't want a hardware-configuration.nix
