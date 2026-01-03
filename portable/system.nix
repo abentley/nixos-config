@@ -49,20 +49,26 @@ nixpkgs.lib.nixosSystem {
           "/transfer" = {
             device = "/dev/disk/by-uuid/6FFD-FA79";
             fsType = "exfat";
-            options = [ "defaults" "uid=1000" "gid=100" ];
+            options = [
+              "defaults"
+              "uid=1000"
+              "gid=100"
+            ];
           };
         };
 
         # 4. Explicitly define the mount unit for /data to control its dependencies.
-        systemd.mounts = [{
-          where = "/data";
-          what = "/dev/nbd0";
-          type = "ext4";
-          options = "defaults,nofail";
-          requires = [ "format-data.service" ];
-          after = [ "format-data.service" ];
-          wantedBy = [ "multi-user.target" ];
-        }];
+        systemd.mounts = [
+          {
+            where = "/data";
+            what = "/dev/nbd0";
+            type = "ext4";
+            options = "defaults,nofail";
+            requires = [ "format-data.service" ];
+            after = [ "format-data.service" ];
+            wantedBy = [ "multi-user.target" ];
+          }
+        ];
 
         # 2. A one-shot service to create the qcow2 file on the first boot.
         systemd.services.setup-qcow2 = {
@@ -91,7 +97,7 @@ nixpkgs.lib.nixosSystem {
           preStart = "modprobe nbd max_part=8";
           serviceConfig = {
             Type = "simple";
-            ExecStart = "${pkgs."qemu-utils"}/bin/qemu-nbd --verbose --connect=/dev/nbd0 /transfer/nixos_storage.qcow2 --persistent";
+            ExecStart = "${pkgs."qemu-utils"}/bin/qemu-nbd --connect=/dev/nbd0 /transfer/nixos_storage.qcow2 --persistent";
             ExecStop = "${pkgs."qemu-utils"}/bin/qemu-nbd --disconnect /dev/nbd0";
             Restart = "on-failure";
           };
@@ -104,7 +110,11 @@ nixpkgs.lib.nixosSystem {
           before = [ "data.mount" ];
           requires = [ "nbd-for-data.service" ];
           serviceConfig.Type = "oneshot";
-          path = [ pkgs.e2fsprogs pkgs.util-linux pkgs.systemd ];
+          path = [
+            pkgs.e2fsprogs
+            pkgs.util-linux
+            pkgs.systemd
+          ];
           script = ''
             set -ex
             NBD_DEV="/dev/nbd0"
@@ -129,7 +139,6 @@ nixpkgs.lib.nixosSystem {
           # Add non-free firmware for hardware like Qualcomm Wi-Fi.
           firmware = [ pkgs.firmwareLinuxNonfree ];
         };
-
 
         # Add common USB storage drivers to the initrd to ensure the SSD is found at boot.
         boot.initrd.availableKernelModules = [
