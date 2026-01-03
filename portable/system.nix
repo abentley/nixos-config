@@ -71,7 +71,7 @@ nixpkgs.lib.nixosSystem {
           after = [ "transfer.mount" ];
           before = [ "nbd-for-data.service" ];
           serviceConfig.Type = "oneshot";
-          path = with pkgs; [ "qemu-utils" e2fsprogs util-linux kmod ];
+          path = [ pkgs."qemu-utils" pkgs.e2fsprogs pkgs.util-linux pkgs.kmod ];
           script = ''
             set -e
             QCOW_FILE="/transfer/nixos_storage.qcow2"
