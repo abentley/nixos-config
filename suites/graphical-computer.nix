@@ -39,6 +39,7 @@
     # Gnome Loupe has bad fullscreen support
     eog
     google-chrome
+    gnomeExtensions.appindicator
     # I guess I'm a creature of habit.
     gnomeExtensions.dash-to-dock
     # edit images

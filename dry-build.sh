@@ -44,13 +44,6 @@ TARGET_HOSTS=$(echo "$TARGET_HOSTS" | awk '{$1=$1};1')
 # --- Determine Hosts to Process ---
 HOSTS_TO_PROCESS=""
 if [ -n "$TARGET_HOSTS" ]; then
-    # Validate each provided host
-    for HOST in $TARGET_HOSTS; do
-        if ! echo " $ALL_HOSTS " | grep -q " $HOST "; then
-            echo "Error: Unknown hostname '$HOST'." >&2
-            usage
-        fi
-    done
     HOSTS_TO_PROCESS="$TARGET_HOSTS"
 else
     HOSTS_TO_PROCESS="$ALL_HOSTS"
