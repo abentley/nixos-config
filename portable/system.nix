@@ -104,12 +104,12 @@ nixpkgs.lib.nixosSystem {
           before = [ "data.mount" ];
           requires = [ "nbd-for-data.service" ];
           serviceConfig.Type = "oneshot";
-          path = [ pkgs.e2fsprogs pkgs.util-linux ];
+          path = [ pkgs.e2fsprogs pkgs.util-linux pkgs.systemd ];
           script = ''
             set -ex
             NBD_DEV="/dev/nbd0"
-            # Give the device a moment to settle after being connected.
-            sleep 1
+            # Wait for the udev event queue to settle, ensuring the device is fully ready
+            udevadm settle
             # Use 'blkid' to check for a filesystem. If it fails (exit code != 0), format.
             if ! blkid -p -o value -s TYPE "$NBD_DEV" >/dev/null 2>&1; then
               echo "No filesystem found on $NBD_DEV. Formatting with ext4..."
