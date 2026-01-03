@@ -73,44 +73,46 @@ nixpkgs.lib.nixosSystem {
           serviceConfig.Type = "oneshot";
           path = [ pkgs."qemu-utils" pkgs.e2fsprogs pkgs.util-linux pkgs.kmod ];
           script = ''
-            set -e
+            set -ex # Exit on error AND print all commands
             QCOW_FILE="/transfer/nixos_storage.qcow2"
             NBD_DEV="/dev/nbd0"
 
-            # Load the nbd kernel module if it's not already.
+            echo "--- Starting setup-qcow2 script ---"
             modprobe nbd max_part=8
 
-            # Create the backing qcow2 file if it doesn't exist.
             if [ ! -f "$QCOW_FILE" ]; then
               echo "Creating 500GB qcow2 image at $QCOW_FILE..."
               qemu-img create -f qcow2 "$QCOW_FILE" 500G
             fi
 
-            # Temporarily connect the device to format it, if needed.
+            echo "Connecting NBD device..."
             qemu-nbd --disconnect "$NBD_DEV" || true
             qemu-nbd --connect="$NBD_DEV" "$QCOW_FILE"
 
-            # Poll for a few seconds to see if the device already has a filesystem.
-            # This is more robust than a fixed sleep.
             FORMATTED=false
             for i in $(seq 1 5); do
-              if blkid -p -o value -s TYPE "$NBD_DEV" >/dev/null 2>&1; then
+              echo "Polling for filesystem, attempt $i..."
+              # Run blkid and check exit code explicitly
+              if blkid -p -o value -s TYPE "$NBD_DEV"; then
+                echo "blkid succeeded. Filesystem found."
                 FORMATTED=true
-                echo "NBD device already formatted."
                 break
+              else
+                echo "blkid failed with exit code $?. Waiting..."
+                sleep 1
               fi
-              echo "Waiting for NBD device to settle... attempt $i"
-              sleep 1
             done
 
-            # If no filesystem was found after polling, format it.
             if [ "$FORMATTED" = "false" ]; then
-              echo "No filesystem found. Formatting $NBD_DEV with ext4..."
-              # Use -F to force formatting on a file-based device if needed.
+              echo "No filesystem found after polling. Formatting $NBD_DEV with ext4..."
               mkfs.ext4 -F "$NBD_DEV"
+            else
+              echo "Skipping format as filesystem already exists."
             fi
 
+            echo "Disconnecting NBD device..."
             qemu-nbd --disconnect "$NBD_DEV"
+            echo "--- Finished setup-qcow2 script ---"
           '';
         };
 
