@@ -1,4 +1,9 @@
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 
 {
   # This option is enabled on laptops.
@@ -8,7 +13,9 @@
 
   config = lib.mkIf config.features.battery-notifier.enable (
     let
-      battery-check-script = pkgs.writeShellScriptBin "check-battery" (builtins.readFile ./../scripts/check-battery.sh);
+      battery-check-script = pkgs.writeShellScriptBin "check-battery" (
+        builtins.readFile ./../scripts/check-battery.sh
+      );
     in
     {
       environment.systemPackages = [ pkgs.libnotify ];
@@ -20,7 +27,10 @@
           User = "abentley";
           Environment = "DISPLAY=:0";
         };
-        path = [ pkgs.libnotify battery-check-script ];
+        path = [
+          pkgs.libnotify
+          battery-check-script
+        ];
         script = "check-battery";
       };
 

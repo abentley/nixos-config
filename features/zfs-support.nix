@@ -1,5 +1,14 @@
-{ raidpool, devNode, hostId }:
-{ pkgs, lib, config, ... }:
+{
+  raidpool,
+  devNode,
+  hostId,
+}:
+{
+  pkgs,
+  lib,
+  config,
+  ...
+}:
 let
   zfsCompatibleKernelPackages = lib.filterAttrs (
     name: kernelPackages:

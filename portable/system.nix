@@ -52,7 +52,13 @@ nixpkgs.lib.nixosSystem {
         hardware.enableRedistributableFirmware = true;
 
         # Add common USB storage drivers to the initrd to ensure the SSD is found at boot.
-        boot.initrd.availableKernelModules = [ "xhci_pci" "ehci_pci" "uas" "usb_storage" "sd_mod" ];
+        boot.initrd.availableKernelModules = [
+          "xhci_pci"
+          "ehci_pci"
+          "uas"
+          "usb_storage"
+          "sd_mod"
+        ];
 
         # Nix settings
         nix.settings.auto-optimise-store = true;
