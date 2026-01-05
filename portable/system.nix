@@ -45,8 +45,8 @@ nixpkgs.lib.nixosSystem {
             fsType = "vfat";
           };
 
-          # 1. Mount the exfat "transfer" partition at /mnt/transfer using its UUID.
-          "/mnt/transfer" = {
+          # 1. Mount the exfat "transfer" partition using its UUID.
+          "/transfer" = {
             device = "/dev/disk/by-uuid/6FFD-FA79";
             fsType = "exfat";
             options = [
@@ -57,52 +57,53 @@ nixpkgs.lib.nixosSystem {
           };
         };
 
-        # 4. Explicitly define the mount unit for /mnt/data to control its dependencies.
-        systemd.mounts = [
-          {
-            where = "/mnt/data";
-            what = "/dev/nbd0";
-            type = "ext4";
-            options = "defaults,nofail";
-            requires = [ "format-data.service" ];
-            after = [ "format-data.service" ];
-            wantedBy = [ "multi-user.target" ];
-          }
-        ];
+        # 4. Explicitly define the mount unit for /data to control its dependencies.
+        # systemd.mounts = [
+        #   {
+        #     where = "/data";
+        #     what = "/dev/nbd0";
+        #     type = "ext4";
+        #     options = "defaults,nofail";
+        #     requires = [ "format-data.service" ];
+        #     after = [ "format-data.service" ];
+        #     wantedBy = [ "multi-user.target" ];
+        #   }
+        # ];
 
         # 2. A one-shot service to create the qcow2 file on the first boot.
-        systemd.services.setup-qcow2 = {
-          description = "Create QCOW2 storage file";
-          wantedBy = [ "multi-user.target" ];
-          after = [ "mnt-transfer.mount" ];
-          before = [ "nbd-for-data.service" ];
-          serviceConfig.Type = "oneshot";
-          path = [ pkgs."qemu-utils" ];
-          script = ''
-            set -ex
-            QCOW_FILE="/mnt/transfer/nixos_storage.qcow2"
-            if [ ! -f "$QCOW_FILE" ]; then
-              echo "Creating 500GB qcow2 image at $QCOW_FILE..."
-              qemu-img create -f qcow2 "$QCOW_FILE" 500G
-            fi
-          '';
-        };
+        # systemd.services.setup-qcow2 = {
+        #   description = "Create QCOW2 storage file";
+        #   wantedBy = [ "multi-user.target" ];
+        #   after = [ "transfer.mount" ];
+        #   before = [ "nbd-for-data.service" ];
+        #   serviceConfig.Type = "oneshot";
+        #   path = [ pkgs."qemu-utils" ];
+        #   script = ''
+        #     set -ex
+        #     QCOW_FILE="/transfer/nixos_storage.qcow2"
+        #     if [ ! -f "$QCOW_FILE" ]; then
+        #       echo "Creating 500GB qcow2 image at $QCOW_FILE..."
+        #       qemu-img create -f qcow2 "$QCOW_FILE" 500G
+        #     fi
+        #   '';
+        # };
 
         # 3. A long-running service to keep the qcow2 file connected as /dev/nbd0.
-        systemd.services.nbd-for-data = {
-          description = "Connect QCOW2 file to NBD device";
-          wantedBy = [ "multi-user.target" ];
-          after = [ "setup-qcow2.service" ];
-          path = [ pkgs.kmod ];
-          preStart = "modprobe nbd max_part=8";
-          serviceConfig = {
-            Type = "simple";
-            ExecStart = "${pkgs."qemu-utils"}/bin/qemu-nbd --connect=/dev/nbd0 /mnt/transfer/nixos_storage.qcow2 --persistent";
-            ExecStop = "${pkgs."qemu-utils"}/bin/qemu-nbd --disconnect /dev/nbd0";
-            Restart = "on-failure";
-          };
-        };
+        # systemd.services.nbd-for-data = {
+        #   description = "Connect QCOW2 file to NBD device";
+        #   wantedBy = [ "multi-user.target" ];
+        #   after = [ "setup-qcow2.service" ];
+        #   path = [ pkgs.kmod ];
+        #   preStart = "modprobe nbd max_part=8";
+        #   serviceConfig = {
+        #     Type = "simple";
+        #     ExecStart = "${pkgs."qemu-utils"}/bin/qemu-nbd --connect=/dev/nbd0 /transfer/nixos_storage.qcow2 --persistent";
+        #     ExecStop = "${pkgs."qemu-utils"}/bin/qemu-nbd --disconnect /dev/nbd0";
+        #     Restart = "on-failure";
+        #   };
+        # };
 
+        # NEW: A one-shot service to format the qcow2 device, if needed.
         systemd.services.format-data = {
           description = "Format QCOW2 storage file if needed";
           after = [ "nbd-for-data.service" ];
