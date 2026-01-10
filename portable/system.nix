@@ -12,6 +12,7 @@ nixpkgs.lib.nixosSystem {
     ../base-configuration.nix
     ../suites/base.nix
     ../suites/graphical-computer.nix
+    ../suites/audio-production.nix
     home-manager.nixosModules.home-manager
 
     (
