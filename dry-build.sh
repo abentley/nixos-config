@@ -5,7 +5,7 @@ set -e
 # By default, it compares all known hosts. A specific host can be targeted.
 # The --update flag saves the new build as the baseline instead of comparing.
 
-ALL_HOSTS="hp handy gamey-wsl thinky thinky-wsl teeny skinny lappy"
+ALL_HOSTS="hp handy gamey-wsl thinky thinky-wsl teeny skinny lappy portable"
 
 usage() {
     echo "Usage: $0 [--update] [<hostname>...]"
@@ -57,7 +57,7 @@ mkdir -p "$BASELINE_DIR"
 build_and_get_path() {
     local flake_attr=$1
     echo "Building $flake_attr..." >&2
-    nix build "$flake_attr" --no-link --print-out-paths
+    nix --extra-experimental-features 'nix-command flakes' build "$flake_attr" --no-link --print-out-paths
 }
 
 for HOST in $HOSTS_TO_PROCESS; do
