@@ -24,7 +24,11 @@ nixpkgs.lib.nixosSystem {
         networking.hostName = "portable";
 
         # Enable our custom features
-        myFeatures.homeManager.enable = true;
+        myFeatures = {
+          homeManager.enable = true;
+          flakeSupport.enable = true;
+          steam.enable = true;
+        };
 
         # Add QEMU tools needed for the qcow2 loopback device.
         environment.systemPackages = [ pkgs."qemu-utils" ];
