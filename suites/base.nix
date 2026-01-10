@@ -45,6 +45,7 @@
     nix-diff
     nix-search
     nmap
+    ntfs3g
     opentofu
     pciutils
     pigz
