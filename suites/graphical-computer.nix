@@ -67,4 +67,5 @@
     42000
     42001
   ];
+  programs.zoom-us.enable = true;
 }
