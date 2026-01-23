@@ -18,6 +18,7 @@
     halloy
     meld
     mtr-gui
+    soundconverter
     # Can be useful as an IDE
     terminator
   ];
