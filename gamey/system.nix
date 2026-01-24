@@ -23,6 +23,21 @@ let
         ];
       };
 
+      fileSystems."/mnt/ubuntu" = {
+        device = "/dev/disk/by-uuid/9e3f835c-90bc-46e8-ade1-508931d94def";
+        fsType = "ext4";
+      };
+
+      fileSystems."/home/abentley" = {
+        device = "/mnt/ubuntu/home/abentley";
+        options = [ "bind" ];
+      };
+
+      fileSystems."/home/abentley/.config" = {
+        device = "/home/abentley/.nixos-config";
+        options = [ "bind" ];
+      };
+
       # Enable features
       myFeatures = {
         grub = {
