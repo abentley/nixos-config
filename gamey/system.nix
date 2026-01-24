@@ -9,22 +9,6 @@ let
   custom = (
     { config, pkgs, ... }:
     {
-      networking.hostName = "gamey"; # Define your hostname.
-    }
-  );
-in
-nixpkgs.lib.nixosSystem {
-  system = "x86_64-linux";
-  modules = [
-    ../base-configuration.nix
-    ./hardware-configuration.nix
-    ../suites/base.nix
-    ../suites/laptop.nix
-    ../suites/audio-production.nix
-    ../features/options.nix
-    home-manager.nixosModules.home-manager
-    custom
-    {
       boot.supportedFilesystems = [ "bcachefs" ];
 
       # Redefined from hardware so I can supply POLICY
@@ -44,7 +28,10 @@ nixpkgs.lib.nixosSystem {
         grub = {
           bootMode = "efi";
           resolution = "1280x720x32";
-          splashImage = ../teeny/darktrees.png;
+          splashImage = pkgs.fetchurl {
+            url = "https://assets.aaronbentley.com/treemoon-3.png";
+            sha256 = "4d7b02f8e950f8bf5e9b45cf993d8307ad3778980d131e1d8d4cf09aa9fdfd16";
+          };
         };
         homeManager.enable = true;
         hyprland = {
@@ -58,6 +45,20 @@ nixpkgs.lib.nixosSystem {
         };
         steam.enable = true;
       };
+      networking.hostName = "gamey"; # Define your hostname.
     }
+  );
+in
+nixpkgs.lib.nixosSystem {
+  system = "x86_64-linux";
+  modules = [
+    ../base-configuration.nix
+    ./hardware-configuration.nix
+    ../suites/base.nix
+    ../suites/audio-production.nix
+    ../suites/graphical-computer.nix
+    ../features/options.nix
+    home-manager.nixosModules.home-manager
+    custom
   ];
 }
