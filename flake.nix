@@ -52,6 +52,7 @@
       nixosConfigurations.thinky = import ./thinky/system.nix inputs;
       nixosConfigurations.thinky-wsl = import ./thinky-wsl/system.nix inputs;
       nixosConfigurations.teeny = import ./teeny/system.nix inputs;
+      nixosConfigurations.gamey = import ./gamey/system.nix inputs;
       nixosConfigurations.gamey-wsl = import ./gamey-wsl/system.nix inputs;
       nixosConfigurations.hp = import ./hp/system.nix inputs;
       nixosConfigurations.skinny = import ./skinny/system.nix inputs;
