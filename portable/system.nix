@@ -142,7 +142,7 @@ nixpkgs.lib.nixosSystem {
           enableRedistributableFirmware = true;
 
           # Add non-free firmware for hardware like Qualcomm Wi-Fi.
-          firmware = [ pkgs.firmwareLinuxNonfree ];
+          firmware = [ pkgs.linux-firmware ];
         };
 
         # Add common USB storage drivers to the initrd to ensure the SSD is found at boot.
