@@ -5,7 +5,7 @@ set -e
 # By default, it compares all known hosts. A specific host can be targeted.
 # The --update flag saves the new build as the baseline instead of comparing.
 
-ALL_HOSTS="hp handy gamey gamey-wsl thinky thinky-wsl skinny lappy portable teeny"
+ALL_HOSTS="hp handy gamey gamey-wsl thinky thinky-wsl skinny lappy portable"
 
 usage() {
     echo "Usage: $0 [--update] [<hostname>...]"
