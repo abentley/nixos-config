@@ -55,9 +55,11 @@ in
   services.blueman.enable = true;
 
   services.logind = {
-    lidSwitch = "suspend";
-    lidSwitchDocked = "ignore";
-    lidSwitchExternalPower = "suspend";
+    settings.Login = {
+      HandleLidSwitch = "suspend";
+      HandleLidSwitchExternalPower = "suspend";
+      HandleLidSwitchDocked = "ignore";
+    };
   };
   home-manager.users.abentley = {
     home.file.".config/hypr/extra.conf".text = ''
