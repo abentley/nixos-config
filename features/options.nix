@@ -217,6 +217,7 @@
       in
       {
         networking.firewall.trustedInterfaces = [ "incusbr0" ];
+        networking.firewall.allowedTCPPorts = [ 8443 ];
         networking.nftables.enable = true;
         users.users.${primaryUser} = {
           extraGroups = [ "incus-admin" ];
