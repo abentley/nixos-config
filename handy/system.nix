@@ -10,6 +10,10 @@ let
     { config, pkgs, ... }:
     {
       networking.hostName = "handy"; # Define your hostname.
+      environment.systemPackages = with pkgs; [
+        incus
+        virt-viewer
+      ];
     }
   );
 in
