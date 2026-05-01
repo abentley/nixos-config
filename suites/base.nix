@@ -3,6 +3,7 @@
 { config, pkgs, ... }:
 {
   programs = {
+    command-not-found.enable = true;
     git.enable = true;
     mtr.enable = true;
     # Install neovim
@@ -17,6 +18,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    atop
     autoconf
     automake
     breezy
@@ -30,6 +32,7 @@
     gemini-cli
     graphviz
     htop
+    iftop
     iperf3
     just
     jsonnet
@@ -58,9 +61,11 @@
     ripgrep
     squashfsTools
     stdenv
+    sysdig
     tree
     usbutils
     uv
+    wavemon
     wget
     whois
   ];
