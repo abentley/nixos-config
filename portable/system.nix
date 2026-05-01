@@ -9,7 +9,7 @@ nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
     ../features/options.nix
-    ../base-configuration.nix
+    ../physical-machine.nix
     ../suites/base.nix
     ../suites/graphical-computer.nix
     ../suites/audio-production.nix

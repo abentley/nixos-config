@@ -10,7 +10,7 @@
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
-    ../base-configuration.nix
+    ../physical-machine.nix
     ../suites/base.nix
     ../suites/laptop.nix
     ./hardware-configuration.nix

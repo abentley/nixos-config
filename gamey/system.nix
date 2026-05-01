@@ -67,7 +67,7 @@ in
 nixpkgs.lib.nixosSystem {
   system = "x86_64-linux";
   modules = [
-    ../base-configuration.nix
+    ../physical-machine.nix
     ./hardware-configuration.nix
     ../suites/base.nix
     ../suites/audio-production.nix
