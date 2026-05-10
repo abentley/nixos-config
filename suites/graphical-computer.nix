@@ -45,11 +45,13 @@
     # edit images
     gimp-with-plugins
     gparted
+    gsmartcontrol
     halloy
     # Wayland-compatible synergy!
     input-leap
     pwvucontrol
     rhythmbox
+    smartmontools # prerequisite of gmsartcontrol
     vesktop
     vlc
     warpinator
