@@ -49,6 +49,7 @@
     nix-search
     nmap
     ntfs3g
+    openssl_3
     opentofu
     pciutils
     pigz
