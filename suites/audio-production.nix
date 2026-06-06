@@ -14,7 +14,7 @@
     qjackctl
     qsynth
     soundfont-fluid
-    soundfont-generaluser
+    soundfont-generaluser-gs
     sox
   ];
   services.pipewire.jack.enable = true;

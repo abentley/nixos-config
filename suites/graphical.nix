@@ -15,10 +15,14 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     baobab
+    clapgrep
+    gearlever
     halloy
     meld
     mtr-gui
+    resources
     soundconverter
+    switcheroo
     # Can be useful as an IDE
     terminator
   ];

@@ -10,6 +10,8 @@
     neovim = {
       enable = true;
       defaultEditor = true;
+      withPython3 = false;
+      withRuby = false;
       viAlias = true;
     };
     tmux.enable = true;
@@ -43,7 +45,7 @@
     mtr
     ncdu
     nethogs
-    nixfmt-rfc-style
+    nixfmt
     nixfmt-tree
     nix-diff
     nix-search

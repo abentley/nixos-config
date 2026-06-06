@@ -33,13 +33,13 @@ in
     # Suggested idle lock
     # pkgs.swayidle
     # Animated wallpaper
-    pkgs.swww
+    pkgs.awww
     pkgs.walker
     pkgs.wofi
     # Clipboard functionality?
     pkgs.wl-clipboard
     # Find key symbols
-    pkgs.xorg.xev
+    pkgs.xev
   ];
 
   users.users.${primaryUser}.extraGroups = [
@@ -63,8 +63,8 @@ in
   };
   home-manager.users.abentley = {
     home.file.".config/hypr/extra.conf".text = ''
-      exec-once = swww-daemon
-      exec-once = swww img ${wallpaper} --outputs all
+      exec-once = awww-daemon
+      exec-once = awww img ${wallpaper} --outputs all
       exec-once = swaync
     '';
     home.file.".config/swaync/config.json".text = ''
