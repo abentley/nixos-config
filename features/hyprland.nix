@@ -15,6 +15,7 @@ in
     pkgs.bibata-cursors
     # Needed for brightness in hyprland
     pkgs.brightnessctl
+    pkgs.elephant # used by walker --gapplication-service?
     pkgs.hyprcursor
     # Suggested session locker
     # pkgs.hyprlock
