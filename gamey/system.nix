@@ -15,12 +15,6 @@ let
       fileSystems."/" = {
         device = "UUID=0e047d03-9eea-4bde-8244-abc75adf6847";
         fsType = "bcachefs";
-        options = [
-          "compression=lz4"
-          "foreground_target=ssd"
-          "background_target=hdd"
-          "promote_target=ssd"
-        ];
       };
 
       fileSystems."/mnt/ubuntu" = {
