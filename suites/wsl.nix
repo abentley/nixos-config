@@ -7,7 +7,6 @@
 }:
 {
   environment.systemPackages = [
-    pkgs.wslu
     pkgs.xdg-utils
     pkgs.keychain
   ];

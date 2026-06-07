@@ -38,11 +38,13 @@
   fileSystems."/home/abentley" = {
     device = "/mnt/ubuntu/home/abentley";
     options = [ "bind" ];
+    fsType = "none";
   };
 
   fileSystems."/home/abentley/.config" = {
     device = "/home/abentley/.nixos-config";
     options = [ "bind" ];
+    fsType = "none";
   };
 
   fileSystems."/boot" = {
