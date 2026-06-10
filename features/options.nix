@@ -319,6 +319,13 @@
         dedicatedServer.openFirewall = true;
         localNetworkGameTransfers.openFirewall = true;
       };
+      programs.gamemode.enable = true;
+      environment.systemPackages = with pkgs; [
+        # Gaming HUD for seeing FPS etc
+        mangohud
+        # Config GUI for mangohud
+        goverlay
+      ];
     })
 
     # systemd-boot feature

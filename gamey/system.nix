@@ -9,6 +9,8 @@ let
   custom = (
     { config, pkgs, ... }:
     {
+      # Better gaming support
+      boot.kernelPackages = pkgs.linuxPackages_zen;
       boot.supportedFilesystems = [ "bcachefs" ];
 
       # Redefined from hardware so I can supply POLICY
@@ -32,6 +34,24 @@ let
         device = "/home/abentley/.nixos-config";
         options = [ "bind" ];
         fsType = "none";
+      };
+
+      # NVIDIA configuration
+      hardware.graphics = {
+        enable = true;
+        enable32Bit = true;
+      };
+
+      services.xserver.videoDrivers = [ "nvidia" ];
+
+      hardware.nvidia = {
+        modesetting.enable = true;
+        powerManagement.enable = false;
+        powerManagement.finegrained = false;
+        open = false;
+        nvidiaSettings = true;
+        # GTX 1070 not supported on the lastest & greatest.
+        package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
       };
 
       # Enable features
