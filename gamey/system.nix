@@ -13,12 +13,6 @@ let
       # Better gaming support
       boot.kernelPackages = pkgs.linuxPackages_zen;
       boot.supportedFilesystems = [ "bcachefs" ];
-      environment.systemPackages = [
-        antigravity-nix.packages.x86_64-linux.default
-        antigravity-nix.packages.x86_64-linux.google-antigravity-ide
-        antigravity-nix.packages.x86_64-linux.google-antigravity-cli
-      ];
-
 
       # Redefined from hardware so I can supply POLICY
       fileSystems."/" = {
@@ -95,6 +89,7 @@ nixpkgs.lib.nixosSystem {
     ../suites/base.nix
     ../suites/audio-production.nix
     ../suites/graphical-computer.nix
+    (import ../suites/dev.nix antigravity-nix)
     ../features/options.nix
     home-manager.nixosModules.home-manager
     custom

@@ -3,6 +3,7 @@
   self,
   nixpkgs,
   home-manager,
+  antigravity-nix,
   ...
 }:
 let
@@ -25,6 +26,7 @@ nixpkgs.lib.nixosSystem {
     ../suites/base.nix
     ../suites/laptop.nix
     ../suites/audio-production.nix
+    (import ../suites/dev.nix antigravity-nix)
     ../features/options.nix # Add the new options file
     home-manager.nixosModules.home-manager
     custom
