@@ -8,6 +8,11 @@
     nixos-wsl.url = "github:nix-community/NixOS-WSL/main";
     old-nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-24.11";
     old-nixpkgs.flake = false;
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
+    antigravity-nix = {
+      url = "github:jacopone/antigravity-nix";
+      inputs.nixpkgs.follows = "unstable";
+    };
   };
 
   outputs =
@@ -17,6 +22,8 @@
       old-nixpkgs,
       home-manager,
       nixos-wsl,
+      unstable,
+      antigravity-nix,
     }:
     let
       # Pass the system attribute directly to the Nixpkgs import.

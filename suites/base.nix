@@ -31,7 +31,6 @@
     file
     gcc
     gccStdenv
-    gemini-cli
     graphviz
     htop
     iftop
