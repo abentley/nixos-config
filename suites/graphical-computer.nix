@@ -33,7 +33,6 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    beeper
     discord
     easyeffects
     # Gnome Loupe has bad fullscreen support
