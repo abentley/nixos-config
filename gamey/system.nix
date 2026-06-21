@@ -37,23 +37,21 @@ let
         fsType = "none";
       };
 
-      # NVIDIA configuration
+      # Intel Graphics configuration
       hardware.graphics = {
         enable = true;
         enable32Bit = true;
+        extraPackages = with pkgs; [
+          intel-media-driver
+          intel-vaapi-driver
+          libvdpau-va-gl
+        ];
       };
 
-      services.xserver.videoDrivers = [ "nvidia" ];
-
-      hardware.nvidia = {
-        modesetting.enable = true;
-        powerManagement.enable = false;
-        powerManagement.finegrained = false;
-        open = false;
-        nvidiaSettings = true;
-        # GTX 1070 not supported on the lastest & greatest.
-        package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+      environment.sessionVariables = {
+        LIBVA_DRIVER_NAME = "iHD";
       };
+
 
       # Enable features
       myFeatures = {
@@ -86,6 +84,7 @@ nixpkgs.lib.nixosSystem {
   modules = [
     ../physical-machine.nix
     ./hardware-configuration.nix
+    ./nvidia.nix
     ../suites/base.nix
     ../suites/audio-production.nix
     ../suites/graphical-computer.nix
