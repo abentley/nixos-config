@@ -3,6 +3,10 @@
 # on the host machine.
 { config, pkgs, ... }:
 {
+  programs.appimage = {
+    enable = true;
+    binfmt = true;
+  };
   programs.wireshark.enable = true;
   # Enable "Desktop sharing"
   services.gnome.gnome-remote-desktop.enable = true;
