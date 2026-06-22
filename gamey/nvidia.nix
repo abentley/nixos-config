@@ -34,7 +34,7 @@
   # Force GNOME / Mutter to run on the Intel integrated GPU (needed for dual-GPU setup)
   # and create persistent symlinks without colons for DRM devices.
   services.udev.extraRules = ''
-    ACTION=="add", SUBSYSTEM=="drm", KERNEL=="card*", KERNELS=="0000:00:02.0", SYMLINK+="dri/intel-igpu", TAG+="mutter-device-preferred-primary"
-    ACTION=="add", SUBSYSTEM=="drm", KERNEL=="card*", KERNELS=="0000:01:00.0", SYMLINK+="dri/nvidia-dgpu"
+    SUBSYSTEM=="drm", KERNEL=="card*", KERNELS=="0000:00:02.0", SYMLINK+="dri/intel-igpu", TAG+="mutter-device-preferred-primary"
+    SUBSYSTEM=="drm", KERNEL=="card*", KERNELS=="0000:01:00.0", SYMLINK+="dri/nvidia-dgpu"
   '';
 }
