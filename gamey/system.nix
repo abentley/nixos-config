@@ -52,7 +52,6 @@ let
         LIBVA_DRIVER_NAME = "iHD";
       };
 
-
       # Enable features
       myFeatures = {
         grub = {
