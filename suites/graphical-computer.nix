@@ -33,6 +33,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+    alsa-ucm-conf
     discord
     easyeffects
     # Gnome Loupe has bad fullscreen support
@@ -59,6 +60,7 @@
     xsel
   ];
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.variables.ALSA_CONFIG_UCM2 = "${pkgs.alsa-ucm-conf}/share/alsa/ucm2";
   # 42000, 42001: Warpinator.  Possibly unnecessary.
   networking.firewall.allowedTCPPorts = [
     42000
@@ -69,4 +71,24 @@
     42001
   ];
   programs.zoom-us.enable = true;
+
+  services.pipewire.wireplumber.extraConfig = {
+    "10-disable-ucm-ur44c" = {
+      "monitor.alsa.rules" = [
+        {
+          matches = [
+            {
+              "device.name" = "alsa_card.usb-Yamaha_Corporation_Steinberg_UR44C-00";
+            }
+          ];
+          actions = {
+            update-props = {
+              "api.alsa.use-ucm" = false;
+            };
+          };
+        }
+      ];
+    };
+  };
 }
+

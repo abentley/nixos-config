@@ -38,7 +38,7 @@ let
       networking.hostName = "teeny"; # Define your hostname.
 
       # This is more of a graphical-server config, but I only have one of those.
-      services.xserver.displayManager.gdm.autoSuspend = false;
+      services.displayManager.gdm.autoSuspend = false;
       services.iperf3 = {
         enable = true;
         openFirewall = true;
