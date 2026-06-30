@@ -29,6 +29,7 @@ let
         "/mnt/exchange" = {
           device = "/dev/disk/by-uuid/1473-340A";
           fsType = "vfat";
+          options = [ "uid=1000" ];
         };
 
         "/home/abentley" = {
