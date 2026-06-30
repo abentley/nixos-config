@@ -15,26 +15,33 @@ let
       boot.supportedFilesystems = [ "bcachefs" ];
 
       # Redefined from hardware so I can supply POLICY
-      fileSystems."/" = {
-        device = "UUID=0e047d03-9eea-4bde-8244-abc75adf6847";
-        fsType = "bcachefs";
-      };
+      fileSystems = {
+        "/" = {
+          device = "UUID=0e047d03-9eea-4bde-8244-abc75adf6847";
+          fsType = "bcachefs";
+        };
 
-      fileSystems."/mnt/ubuntu" = {
-        device = "/dev/disk/by-uuid/9e3f835c-90bc-46e8-ade1-508931d94def";
-        fsType = "ext4";
-      };
+        "/mnt/ubuntu" = {
+          device = "/dev/disk/by-uuid/9e3f835c-90bc-46e8-ade1-508931d94def";
+          fsType = "ext4";
+        };
 
-      fileSystems."/home/abentley" = {
-        device = "/mnt/ubuntu/home/abentley";
-        options = [ "bind" ];
-        fsType = "none";
-      };
+        "/mnt/exchange" = {
+          device = "/dev/disk/by-uuid/1473-340A";
+          fsType = "vfat";
+        };
 
-      fileSystems."/home/abentley/.config" = {
-        device = "/home/abentley/.nixos-config";
-        options = [ "bind" ];
-        fsType = "none";
+        "/home/abentley" = {
+          device = "/mnt/ubuntu/home/abentley";
+          options = [ "bind" ];
+          fsType = "none";
+        };
+
+        "/home/abentley/.config" = {
+          device = "/home/abentley/.nixos-config";
+          options = [ "bind" ];
+          fsType = "none";
+        };
       };
 
       # Intel Graphics configuration
