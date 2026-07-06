@@ -41,11 +41,9 @@
     libtool
     lsof
     macchina
-    mtr
     ncdu
     nethogs
     nixfmt
-    nixfmt-tree
     nix-diff
     nix-search
     nmap

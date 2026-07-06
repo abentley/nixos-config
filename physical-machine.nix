@@ -10,8 +10,6 @@ let
 in
 
 {
-  imports = [
-  ];
 
   boot.supportedFilesystems = [ "exfat" ];
 
@@ -24,7 +22,15 @@ in
   # Enable networking
   networking.networkmanager.enable = true;
 
-  nix.settings.download-buffer-size = 500 * MiB;
+  nix.settings = {
+    download-buffer-size = 500 * MiB;
+    auto-optimise-store = true;
+  };
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 30d";
+  };
 
   # Set your time zone.
   time.timeZone = "America/Toronto";
@@ -63,6 +69,7 @@ in
     extraGroups = [
       "networkmanager"
       "wheel"
+      "wireshark"
     ];
     packages = with pkgs; [
       #  thunderbird

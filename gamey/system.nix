@@ -16,11 +16,6 @@ let
 
       # Redefined from hardware so I can supply POLICY
       fileSystems = {
-        "/" = {
-          device = "UUID=0e047d03-9eea-4bde-8244-abc75adf6847";
-          fsType = "bcachefs";
-        };
-
         "/mnt/ubuntu" = {
           device = "/dev/disk/by-uuid/9e3f835c-90bc-46e8-ade1-508931d94def";
           fsType = "ext4";
@@ -40,7 +35,7 @@ let
 
         "/home/abentley/.config" = {
           device = "/home/abentley/.nixos-config";
-          options = [ "bind" ];
+          options = [ "bind" "x-systemd.requires-mounts-for=/home/abentley" ];
           fsType = "none";
         };
       };

@@ -17,9 +17,6 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
 
-  # Enable "Desktop sharing"
-  services.gnome.gnome-remote-desktop.enable = true;
-
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
@@ -46,7 +43,6 @@
     gimp-with-plugins
     gparted
     gsmartcontrol
-    halloy
     # Wayland-compatible synergy!
     input-leap
     pwvucontrol
