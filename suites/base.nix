@@ -1,6 +1,6 @@
 # Provide a base suite of console-based packages and configurations for all
 # systems.
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   programs = {
     command-not-found.enable = true;
@@ -77,11 +77,19 @@
   environment.homeBinInPath = true;
 
   # Provide an alternative to gnome-keychain if not running.
+  programs.ssh.startAgent = lib.mkDefault true;
   programs.ssh.extraConfig = "AddKeysToAgent yes";
   programs.bash.interactiveShellInit = ''
-  # Force keychain to borrow GNOME's existing socket rather than spawning a new agent
-  eval "$(keychain --eval --inherit any-once --dir /run/user/1000/keychain --quiet)"
-'';
+    # If the login session hasn't given us an agent, check our standard system
+    # paths top-down
+    if [ -z "$SSH_AUTH_SOCK" ]; then
+      if [ -S "/run/user/$UID/gcr/ssh" ]; then
+        export SSH_AUTH_SOCK="/run/user/$UID/gcr/ssh"
+      elif [ -S "/run/user/$UID/ssh-agent" ]; then
+        export SSH_AUTH_SOCK="/run/user/$UID/ssh-agent"
+      fi
+    fi
+  '';
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
