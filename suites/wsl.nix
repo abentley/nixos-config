@@ -15,5 +15,6 @@
     defaultUser = primaryUser;
     tarball.configPath = ../.;
     startMenuLaunchers = true;
+    interop.register = true;
   };
 }
