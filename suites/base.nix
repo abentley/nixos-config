@@ -78,7 +78,10 @@
 
   # Provide an alternative to gnome-keychain if not running.
   programs.ssh.extraConfig = "AddKeysToAgent yes";
-  programs.bash.interactiveShellInit = ''eval "$(keychain --eval --quiet)"'';
+  programs.bash.interactiveShellInit = ''
+  # Force keychain to borrow GNOME's existing socket rather than spawning a new agent
+  eval "$(keychain --eval --inherit any-once --dir /run/user/1000/keychain --quiet)"
+'';
 
   # Enable the OpenSSH daemon.
   services.openssh.enable = true;
