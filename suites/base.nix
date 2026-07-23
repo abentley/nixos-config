@@ -1,6 +1,11 @@
 # Provide a base suite of console-based packages and configurations for all
 # systems.
-{ config, pkgs, lib, ... }:
+{
+  config,
+  pkgs,
+  lib,
+  ...
+}:
 {
   programs = {
     command-not-found.enable = true;
@@ -44,6 +49,7 @@
     ncdu
     nethogs
     nixfmt
+    nixfmt-tree
     nix-diff
     nix-search
     nmap

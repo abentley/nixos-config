@@ -35,7 +35,10 @@ let
 
         "/home/abentley/.config" = {
           device = "/home/abentley/.nixos-config";
-          options = [ "bind" "x-systemd.requires-mounts-for=/home/abentley" ];
+          options = [
+            "bind"
+            "x-systemd.requires-mounts-for=/home/abentley"
+          ];
           fsType = "none";
         };
       };

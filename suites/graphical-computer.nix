@@ -47,6 +47,7 @@
     gsmartcontrol
     # Wayland-compatible synergy!
     input-leap
+    pavucontrol
     pwvucontrol
     rhythmbox
     smartmontools # prerequisite of gmsartcontrol
@@ -89,4 +90,3 @@
     };
   };
 }
-
