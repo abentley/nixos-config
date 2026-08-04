@@ -3,6 +3,7 @@
   self,
   nixpkgs,
   home-manager,
+  lanzaboote,
   ...
 }:
 nixpkgs.lib.nixosSystem {
@@ -14,9 +15,10 @@ nixpkgs.lib.nixosSystem {
     ../suites/graphical-computer.nix
     ../suites/audio-production.nix
     home-manager.nixosModules.home-manager
+    lanzaboote.nixosModules.lanzaboote
 
     (
-      { pkgs, ... }:
+      { pkgs, lib, ... }:
       {
         # Allow installation of non-free packages, like the firmware needed for this wifi card.
         nixpkgs.config.allowUnfree = true;
@@ -31,12 +33,20 @@ nixpkgs.lib.nixosSystem {
           steam.enable = true;
         };
 
-        # Add QEMU tools needed for the qcow2 loopback device.
-        environment.systemPackages = [ pkgs."qemu-utils" ];
+        # Add QEMU tools needed for the qcow2 loopback device and sbctl for secure boot key management.
+        environment.systemPackages = [
+          pkgs."qemu-utils"
+          pkgs.sbctl
+        ];
 
-        # Bootloader.
-        boot.loader.systemd-boot.enable = true;
-        boot.loader.efi.canTouchEfiVariables = true;
+        # Bootloader & Secure Boot.
+        boot.bootspec.enable = true;
+        boot.loader.systemd-boot.enable = lib.mkForce false;
+        boot.loader.efi.canTouchEfiVariables = false;
+        boot.lanzaboote = {
+          enable = true;
+          pkiBundle = "/etc/secureboot";
+        };
 
         # Define the filesystems.
         fileSystems = {

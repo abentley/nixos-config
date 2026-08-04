@@ -13,6 +13,10 @@
       url = "github:jacopone/antigravity-nix";
       inputs.nixpkgs.follows = "unstable";
     };
+    lanzaboote = {
+      url = "github:nix-community/lanzaboote";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -24,6 +28,7 @@
       nixos-wsl,
       unstable,
       antigravity-nix,
+      lanzaboote,
     }:
     let
       # Pass the system attribute directly to the Nixpkgs import.
