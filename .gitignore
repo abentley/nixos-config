@@ -3,3 +3,4 @@ samba-vr.nix
 
 # Nix build results
 result*
+.aider*
