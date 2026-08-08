@@ -90,6 +90,7 @@ nixpkgs.lib.nixosSystem {
     ../physical-machine.nix
     ./hardware-configuration.nix
     ./nvidia.nix
+    ../suites/ai.nix
     ../suites/base.nix
     ../suites/audio-production.nix
     ../suites/graphical-computer.nix

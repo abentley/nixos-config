@@ -74,6 +74,7 @@
     wavemon
     wget
     whois
+    zellij
   ];
 
   environment.variables = {
