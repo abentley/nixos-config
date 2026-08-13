@@ -16,4 +16,5 @@
     size = 24
   '';
   home.file.".config/kitty/kitty.conf".source = ../config/kitty.conf;
+  home.file.".config/zellij/config.kdl".source = ../config/zellij.kdl;
 }
