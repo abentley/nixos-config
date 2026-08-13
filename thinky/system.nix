@@ -40,9 +40,21 @@ let
         LC_TELEPHONE = "en_US.UTF-8";
         LC_TIME = "en_US.UTF-8";
       };
+      environment.systemPackages = [
+        (pkgs.symlinkJoin {
+          name = "shotwell-fixed";
+          paths = [ pkgs.shotwell ];
+          nativeBuildInputs = [ pkgs.makeBinaryWrapper ];
+          postBuild = ''
+            # Remove the broken binary wrapper created by nixpkgs
+            rm $out/bin/shotwell
 
-      environment.systemPackages = with pkgs; [
-        shotwell
+            # Re-wrap the real underlying binary with the correct SVG loader directory
+            makeWrapper ${pkgs.shotwell}/bin/.shotwell-wrapped $out/bin/shotwell \
+              --prefix GDK_PIXBUF_MODULEDIR : "${pkgs.librsvg}/lib/gdk-pixbuf-2.0/2.10.0/loaders" \
+              --prefix XDG_DATA_DIRS : "${pkgs.adwaita-icon-theme}/share:${pkgs.gsettings-desktop-schemas}/share"
+          '';
+        })
       ];
     }
   );
