@@ -57,11 +57,6 @@
     gimp-with-plugins
     gparted
     gsmartcontrol
-    gst_all_1.gst-plugins-base
-    gst_all_1.gst-plugins-good
-    gst_all_1.gst-plugins-bad
-    gst_all_1.gst-plugins-ugly
-    gst_all_1.gst-libav
     # Wayland-compatible synergy!
     input-leap
     pavucontrol
@@ -75,10 +70,7 @@
     # X11 tool instead.
     xsel
   ];
-  environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    GST_PLUGIN_SYSTEM_PATH_1_0 = "/run/current-system/sw/lib/gstreamer-1.0";
-  };
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.variables.ALSA_CONFIG_UCM2 = "${pkgs.alsa-ucm-conf}/share/alsa/ucm2";
   # 42000, 42001: Warpinator.  Possibly unnecessary.
   networking.firewall.allowedTCPPorts = [
