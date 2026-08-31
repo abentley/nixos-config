@@ -1,0 +1,20 @@
+--- a/src/stream.ts
++++ b/src/stream.ts
+@@ -246,6 +246,17 @@
+     this.discoverer.connect("discovered", (_source, info, error) => {
+       this.tags = info.get_tags();
+
++      if (
++        info.get_result() === GstPbUtils.DiscovererResult.OK ||
++        (info.get_result() === GstPbUtils.DiscovererResult.MISSING_PLUGINS &&
++          info.get_audio_streams().length > 0)
++      ) {
++        const uri = info.get_uri();
++        this._play.set_uri(uri);
++        this.waveform_generator.generate_peaks_async(uri);
++        return;
++      }
++
+       switch (info.get_result()) {
+         case GstPbUtils.DiscovererResult.OK: {
+           const uri = info.get_uri();

@@ -8,6 +8,16 @@
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
+  nixpkgs.overlays = [
+    (final: prev: {
+      decibels = prev.decibels.overrideAttrs (old: {
+        patches = (old.patches or [ ]) ++ [
+          ../packages/decibels-missing-plugins.patch
+        ];
+      });
+    })
+  ];
+
   # Enable TeamViewer
   services.teamviewer.enable = true;
 
