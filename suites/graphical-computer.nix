@@ -38,6 +38,7 @@
     easyeffects
     # Gnome Loupe has bad fullscreen support
     eog
+    ghostty
     google-chrome
     gnomeExtensions.appindicator
     # I guess I'm a creature of habit.

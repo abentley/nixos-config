@@ -18,4 +18,5 @@
   home.file.".config/kitty/kitty.conf".source = ../config/kitty.conf;
   home.file.".config/zellij/config.kdl".source = ../config/zellij.kdl;
   home.file.".config/zellij/layouts".source = ../config/zellij/layouts;
+  home.file.".config/ghostty/config.ghostty".source = ../config/config.ghostty;
 }
