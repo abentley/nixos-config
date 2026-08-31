@@ -4,6 +4,7 @@
   nixpkgs,
   home-manager,
   antigravity-nix,
+  unstable,
   ...
 }:
 let
@@ -85,6 +86,9 @@ let
   );
 in
 nixpkgs.lib.nixosSystem {
+  specialArgs = {
+    inherit unstable;
+  };
   system = "x86_64-linux";
   modules = [
     ../physical-machine.nix
