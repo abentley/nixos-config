@@ -41,20 +41,22 @@ let
         LC_TIME = "en_US.UTF-8";
       };
       environment.systemPackages = [
-        (pkgs.symlinkJoin {
-          name = "shotwell-fixed";
-          paths = [ pkgs.shotwell ];
-          nativeBuildInputs = [ pkgs.makeBinaryWrapper ];
-          postBuild = ''
-            # Remove the broken binary wrapper created by nixpkgs
-            rm $out/bin/shotwell
-
-            # Re-wrap the real underlying binary with the correct SVG loader directory
-            makeWrapper ${pkgs.shotwell}/bin/.shotwell-wrapped $out/bin/shotwell \
-              --prefix GDK_PIXBUF_MODULEDIR : "${pkgs.librsvg}/lib/gdk-pixbuf-2.0/2.10.0/loaders" \
-              --prefix XDG_DATA_DIRS : "${pkgs.adwaita-icon-theme}/share:${pkgs.gsettings-desktop-schemas}/share"
+        (pkgs.shotwell.overrideAttrs (old: {
+          postInstall = ''
+            # Nixpkgs' shotwell postInstall sets GDK_PIXBUF_MODULE_FILE with only libheif.lib,
+            # which unintentionally strips librsvg from the pixbuf loader cache and breaks SVG icons.
+            # Adding librsvg ensures both HEIF and SVG loaders are available while preserving all
+            # GTK schemas (like org.gtk.Settings.FileChooser), typelibs, and plugins set by wrapGAppsHook3.
+            export GDK_PIXBUF_MODULE_FILE="${
+              pkgs.gnome._gdkPixbufCacheBuilder_DO_NOT_USE {
+                extraLoaders = [
+                  pkgs.libheif.lib
+                  pkgs.librsvg
+                ];
+              }
+            }"
           '';
-        })
+        }))
       ];
     }
   );
