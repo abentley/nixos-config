@@ -62,9 +62,10 @@ let
           '';
         }))
       ];
+      # This device can only be used with specific Thinkpad docks that I don't
+      # own, so disable it to save power.
       services.udev.extraRules = ''
-        # Unbind Intel I219-V Ethernet controller at PCI 0000:00:1f.6
-        ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:00:1f.6", ATTR{driver/unbind}="%k"
+        ACTION=="add", SUBSYSTEM=="pci", DRIVER=="e1000e", KERNEL=="0000:00:1f.6", ATTR{driver/unbind}="%k"
       '';
     }
   );
