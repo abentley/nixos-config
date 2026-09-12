@@ -23,7 +23,7 @@ let
         initrd.kernelModules = [ "i915" ];
         kernelParams = [
           # Prevent Cool & Quiet on Lap from forcing "balanced" mode.
-          # This allows "low power to be used".
+          # This allows "low power" to be used.
           "thinkpad_acpi.profile_force=-1"
         ];
       };
@@ -33,7 +33,6 @@ let
       # boot.plymouth.enable = true;
 
       networking.hostName = "thinky"; # Define your hostname.
-
       i18n.extraLocaleSettings = {
         LC_ADDRESS = "en_US.UTF-8";
         LC_IDENTIFICATION = "en_US.UTF-8";
@@ -63,6 +62,10 @@ let
           '';
         }))
       ];
+      services.udev.extraRules = ''
+        # Unbind Intel I219-V Ethernet controller at PCI 0000:00:1f.6
+        ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:00:1f.6", ATTR{driver/unbind}="%k"
+      '';
     }
   );
 in

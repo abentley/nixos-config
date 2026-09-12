@@ -1,4 +1,8 @@
-{ pkgs, unstable ? null, ... }:
+{
+  pkgs,
+  unstable ? null,
+  ...
+}:
 
 let
   basePkgs =
@@ -9,7 +13,9 @@ let
     else
       import unstable {
         inherit (pkgs.stdenv.hostPlatform) system;
-        config = { allowUnfree = true; };
+        config = {
+          allowUnfree = true;
+        };
       };
 
   ollamaVersion = "0.33.2";
