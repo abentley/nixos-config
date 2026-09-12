@@ -21,6 +21,11 @@ let
           efi.canTouchEfiVariables = true;
         };
         initrd.kernelModules = [ "i915" ];
+        kernelParams = [
+          # Prevent Cool & Quiet on Lap from forcing "balanced" mode.
+          # This allows "low power to be used".
+          "thinkpad_acpi.profile_force=-1"
+        ];
       };
 
       # boot.loader.systemd-boot.enable = true;
