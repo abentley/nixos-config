@@ -65,7 +65,8 @@ let
       # This device can only be used with specific Thinkpad docks that I don't
       # own, so disable it to save power.
       services.udev.extraRules = ''
-        ACTION=="add", SUBSYSTEM=="pci", DRIVER=="e1000e", KERNEL=="0000:00:1f.6", ATTR{driver/unbind}="%k"
+        # Unbind PCI 0000:00:1f.6 directly via e1000e's unbind attribute
+        ACTION=="add", SUBSYSTEM=="pci", KERNEL=="0000:00:1f.6", RUN+="${pkgs.bash}/bin/bash -c 'echo 0000:00:1f.6 > /sys/bus/pci/drivers/e1000e/unbind'"
       '';
     }
   );
