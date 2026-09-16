@@ -1,3 +1,29 @@
 foreground = #AAAAAA
 background = #000000
 background-opacity = 0.925
+
+# EGA / Linux-console 16-color palette (matches Terminator's "Linux" scheme)
+palette = 0=#000000
+# Dark red
+palette = 1=#bb0000
+# Dark green
+palette = 2=#00aa00
+# Orange / Dark yellow
+palette = 3=#aa5500
+# Dark blue
+palette = 4=#3333ff
+# Dark Magenta
+palette = 5=#aa00aa
+# Dark Cyan
+palette = 6=#00aaaa
+palette = 7=#aaaaaa
+palette = 8=#555555
+# Bright Red
+palette = 9=#ff5555
+# Bright Green
+palette = 10=#55ff55
+palette = 11=#ffff55
+palette = 12=#5555ff
+palette = 13=#ff55ff
+palette = 14=#55ffff
+palette = 15=#ffffff
