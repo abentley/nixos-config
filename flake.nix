@@ -43,6 +43,7 @@
         (import ./suites/base.nix {
           config = { };
           pkgs = pkgs;
+          lib = pkgs.lib;
         }).environment.systemPackages
         ++ [
           # add other packages here
@@ -59,6 +60,8 @@
         name = "my-dev-tools";
         paths = selection;
       };
+
+      packages.x86_64-linux.patch-beeper = pkgs.callPackage ./packages/patch-beeper.nix { };
 
       nixosConfigurations.lappy = import ./lappy/system.nix inputs;
       nixosConfigurations.thinky = import ./thinky/system.nix inputs;

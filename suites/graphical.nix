@@ -2,6 +2,9 @@
 # Daily-driver programs such as Chrome are excluded because they would be run
 # on the host machine.
 { config, pkgs, ... }:
+let
+  patch-beeper = pkgs.callPackage ../packages/patch-beeper.nix { };
+in
 {
   programs.appimage = {
     enable = true;
@@ -25,6 +28,7 @@
     halloy
     meld
     mtr-gui
+    patch-beeper
     resources
     soundconverter
     switcheroo
