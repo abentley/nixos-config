@@ -6,6 +6,10 @@
   lib,
   ...
 }:
+let
+  nvim-server = pkgs.callPackage ../packages/nvim-server.nix { };
+  nvim-open = pkgs.callPackage ../packages/nvim-open.nix { };
+in
 {
   programs = {
     command-not-found.enable = true;
@@ -54,6 +58,8 @@
     nix-search
     nmap
     ntfs3g
+    nvim-open
+    nvim-server
     openssl_3
     opentofu
     pciutils

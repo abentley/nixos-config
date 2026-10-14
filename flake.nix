@@ -62,6 +62,8 @@
       };
 
       packages.x86_64-linux.patch-beeper = pkgs.callPackage ./packages/patch-beeper.nix { };
+      packages.x86_64-linux.nvim-server = pkgs.callPackage ./packages/nvim-server.nix { };
+      packages.x86_64-linux.nvim-open = pkgs.callPackage ./packages/nvim-open.nix { };
 
       nixosConfigurations.lappy = import ./lappy/system.nix inputs;
       nixosConfigurations.thinky = import ./thinky/system.nix inputs;
