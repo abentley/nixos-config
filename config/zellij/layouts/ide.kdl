@@ -1,17 +1,30 @@
 layout {
-    default_tab_template {
-        children
+    new_tab_template {
+        pane
         pane size=1 borderless=true {
             plugin location="compact-bar"
         }
+        floating_panes {
+            pane command="env" {
+                args "EDITOR=nvim-open" "yazi"
+            }
+        }
     }
-    tab {
+    tab hide_floating_panes=true {
         pane split_direction="vertical" {
             pane split_direction="horizontal" {
                 pane
                 pane
             }
-            pane command="vim"
+            pane command="nvim-server"
+        }
+        pane size=1 borderless=true {
+            plugin location="compact-bar"
+        }
+        floating_panes {
+            pane command="env" {
+                args "EDITOR=nvim-open" "yazi"
+            }
         }
     }
 }
